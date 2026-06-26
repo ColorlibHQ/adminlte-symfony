@@ -82,6 +82,9 @@ final class AdminLteBundle extends AbstractBundle
         ;
     }
 
+    /**
+     * @param array<string, mixed> $config
+     */
     public function loadExtension(array $config, ContainerConfigurator $container, ContainerBuilder $builder): void
     {
         $builder->setParameter('adminlte.config', $config);

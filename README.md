@@ -65,10 +65,10 @@ return [
 
 ## Configuration
 
-Create `config/packages/adminlte.yaml`:
+Create `config/packages/admin_lte.yaml` (Symfony underscores the bundle name, so the config key is `admin_lte`):
 
 ```yaml
-adminlte:
+admin_lte:
     title: 'My Admin'
     title_short: 'MA'
     color_mode: auto            # light | dark | auto

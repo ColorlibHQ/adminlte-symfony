@@ -5,6 +5,10 @@
          failOnWarning="true"
          failOnDeprecation="true"
          cacheDirectory=".phpunit.cache">
+    <php>
+        <env name="APP_ENV" value="test"/>
+        <env name="KERNEL_DEBUG" value="false"/>
+    </php>
     <testsuites>
         <testsuite name="AdminLTE Symfony Test Suite">
             <directory>tests</directory>

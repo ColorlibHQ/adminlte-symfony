@@ -1,10 +1,6 @@
-{% if url %}
-    <a href="{{ url }}" class="{{ this.buttonClass }}{{ disabled ? ' disabled' }}" role="button"
-       {{ disabled ? 'aria-disabled="true" tabindex="-1"' }}>
-        {% if icon %}<i class="{{ icon }} me-1"></i>{% endif %}{% block content %}{% endblock %}
-    </a>
-{% else %}
-    <button type="{{ type }}" class="{{ this.buttonClass }}"{{ disabled ? ' disabled' }}>
-        {% if icon %}<i class="{{ icon }} me-1"></i>{% endif %}{% block content %}{% endblock %}
-    </button>
-{% endif %}
+{%- set tag = url ? 'a' : 'button' -%}
+<{{ tag }} class="{{ this.buttonClass }}{% if url and disabled %} disabled{% endif %}"
+{%- if url %} href="{{ url }}" role="button"{% if disabled %} aria-disabled="true" tabindex="-1"{% endif %}
+{%- else %} type="{{ type }}"{% if disabled %} disabled{% endif %}{% endif %}>
+    {%- if icon %}<i class="{{ icon }} me-1"></i>{% endif %}{% block content %}{% endblock %}
+</{{ tag }}>

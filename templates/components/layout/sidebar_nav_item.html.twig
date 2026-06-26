@@ -3,8 +3,7 @@
     <li class="nav-header">{{ item.label }}</li>
 {% else %}
     <li class="nav-item{{ item.active and item.hasChildren ? ' menu-open' }}">
-        <a href="{{ item.url ?? '#' }}" class="nav-link{{ item.active ? ' active' }}"
-           {{ item.target ? 'target="' ~ item.target ~ '"' : '' }}>
+        <a href="{{ item.url ?? '#' }}" class="nav-link{{ item.active ? ' active' }}"{% if item.target %} target="{{ item.target }}"{% endif %}>
             {% if item.icon %}<i class="nav-icon {{ item.icon }}"></i>{% endif %}
             <p>
                 {{ item.label }}
