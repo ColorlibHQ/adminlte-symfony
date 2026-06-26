@@ -1,0 +1,8 @@
+<div class="progress-group">
+    {{ label }}
+    <span class="float-end"><b>{{ current }}</b>/{{ total }}</span>
+    <div class="progress progress-sm">
+        <div class="progress-bar bg-{{ variant }}" style="width: {{ this.percent }}%;" role="progressbar"
+             aria-valuenow="{{ this.percent }}" aria-valuemin="0" aria-valuemax="100"></div>
+    </div>
+</div>

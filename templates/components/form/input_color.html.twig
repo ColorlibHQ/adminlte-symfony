@@ -1,0 +1,7 @@
+{% set field_id = this.fieldId %}
+<div class="mb-3">
+    {% if label %}<label for="{{ field_id }}" class="form-label">{{ label }}</label>{% endif %}
+    <input type="color" id="{{ field_id }}" name="{{ name }}" class="form-control form-control-color"
+           value="{{ value }}" title="Choose a colour">
+    {% if help %}<div class="form-text">{{ help }}</div>{% endif %}
+</div>

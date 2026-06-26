@@ -133,24 +133,24 @@ public function dashboard(): Response
 }
 ```
 
-### Components
+### Components (35+)
 
-| Component | Tag |
-|---|---|
-| Dashboard layout | `{% extends '@AdminLte/layout.html.twig' %}` |
-| Sidebar | `<twig:Adminlte:Sidebar />` |
-| Sidebar item *(recursive)* | `<twig:Adminlte:SidebarNavItem :item="item" />` |
-| Topbar | `<twig:Adminlte:Topbar>…</twig:Adminlte:Topbar>` |
-| Footer | `<twig:Adminlte:Footer />` |
-| Color-mode toggle | `<twig:Adminlte:ColorModeToggle />` |
-| Card | `<twig:Adminlte:Card title="…" variant="primary" collapsible>…</twig:Adminlte:Card>` |
-| Small box | `<twig:Adminlte:SmallBox title="150" text="…" icon="bi bi-bag" url="#" />` |
-| Info box | `<twig:Adminlte:InfoBox text="…" number="…" :progress="70" />` |
-| Alert | `<twig:Adminlte:Alert variant="success" dismissible>…</twig:Adminlte:Alert>` |
-| Button | `<twig:Adminlte:Button variant="primary" icon="bi bi-save">Save</twig:Adminlte:Button>` |
-| Input | `<twig:Adminlte:Input name="email" type="email" label="Email" icon="bi bi-envelope" />` |
+**Layout** — `Sidebar`, `SidebarNavItem` *(recursive)*, `Topbar`, `Footer`, `ColorModeToggle`. The dashboard layout itself is `{% extends '@AdminLte/layout.html.twig' %}`.
 
-More components (timeline, profile card, direct-chat, command palette, charts, datatable) are on the roadmap to reach parity with the Vue/React ports.
+**Widgets** — `Card`, `SmallBox`, `InfoBox`, `Alert`, `Callout`, `Progress`, `ProgressGroup`, `Timeline` + `TimelineItem`, `ProfileCard`, `DescriptionBlock`, `Breadcrumb`, `Ratings`, `Toast`, `Modal`, `Accordion` + `AccordionItem`, `Tabs`, `NavNotifications`, `NavMessages`, `NavTasks`, `CommandPalette` (⌘K).
+
+**Forms** — `Button`, `Input`, `Select`, `Textarea`, `InputSwitch`, `InputColor`, `InputFile`.
+
+Every component is a Twig Component:
+
+```twig
+<twig:Adminlte:Card title="Sales" icon="bi bi-graph-up" variant="primary" collapsible>…</twig:Adminlte:Card>
+<twig:Adminlte:SmallBox title="150" text="New orders" icon="bi bi-bag" url="#" />
+<twig:Adminlte:Timeline><twig:Adminlte:TimelineItem icon="bi bi-bell" time="3m" header="Ping" /></twig:Adminlte:Timeline>
+<twig:Adminlte:CommandPalette />  {# ⌘K palette, indexed from your sidebar menu #}
+```
+
+This matches the component inventory of the Vue/React ports. A few heavy plugin wrappers (charts, datatables, rich editors) remain optional add-ons.
 
 ## Dark mode
 

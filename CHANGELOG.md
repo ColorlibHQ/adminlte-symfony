@@ -11,8 +11,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - AssetMapper-first asset pipeline (no Webpack Encore required).
 - Twig Components for the layout shell (`DashboardLayout`, `Sidebar`, `SidebarNav`,
   `SidebarNavItem`, `Topbar`, `Footer`, `ColorModeToggle`).
-- Widget Twig Components: `Card`, `SmallBox`, `InfoBox`, `Alert`.
-- Form Twig Components: `Button`, `Input`.
+- Widget Twig Components: `Card`, `SmallBox`, `InfoBox`, `Alert`, `Callout`, `Progress`,
+  `ProgressGroup`, `Timeline` + `TimelineItem`, `ProfileCard`, `DescriptionBlock`,
+  `Breadcrumb`, `Ratings`, `Toast`, `Modal`, `Accordion` + `AccordionItem`, `Tabs`,
+  `NavNotifications`, `NavMessages`, `NavTasks`, and a ⌘K `CommandPalette` indexed from
+  the sidebar menu — parity with the Vue/React component inventory.
+- Form Twig Components: `Button`, `Input`, `Select`, `Textarea`, `InputSwitch`,
+  `InputColor`, `InputFile`.
 - Config-driven sidebar menu with active-route detection and a `permission` security filter.
 - SSR-safe color/dark-mode toggle (no flash of incorrect theme) persisted to `localStorage`.
 - Optional **AdminLTE theme for EasyAdmin** (`templates/bundles/EasyAdminBundle`).

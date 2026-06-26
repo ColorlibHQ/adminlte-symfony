@@ -1,0 +1,14 @@
+{% if label %}
+    <div class="timeline-time-label">
+        <span class="badge text-bg-{{ variant }}">{{ label }}</span>
+    </div>
+{% else %}
+    <div>
+        <i class="{{ icon }} bg-{{ variant }}"></i>
+        <div class="timeline-item">
+            {% if time %}<span class="time"><i class="bi bi-clock"></i> {{ time }}</span>{% endif %}
+            {% if header %}<h3 class="timeline-header">{{ header }}</h3>{% endif %}
+            <div class="timeline-body">{% block content %}{% endblock %}</div>
+        </div>
+    </div>
+{% endif %}

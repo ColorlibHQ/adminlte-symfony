@@ -63,4 +63,32 @@
             </twig:Adminlte:Card>
         </div>
     </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <twig:Adminlte:Card title="Recent Activity" icon="bi bi-activity">
+                <twig:Adminlte:Timeline>
+                    <twig:Adminlte:TimelineItem label="Today" variant="primary" />
+                    <twig:Adminlte:TimelineItem icon="bi bi-envelope" variant="info" time="12:05" header="New message">
+                        A customer sent you a message.
+                    </twig:Adminlte:TimelineItem>
+                    <twig:Adminlte:TimelineItem icon="bi bi-cart-check" variant="success" time="09:30" header="New order #1234" />
+                </twig:Adminlte:Timeline>
+            </twig:Adminlte:Card>
+        </div>
+        <div class="col-md-6">
+            <twig:Adminlte:Callout variant="info" title="Pro tip">
+                Press <kbd>⌘</kbd>/<kbd>Ctrl</kbd> + <kbd>K</kbd> to open the command palette.
+            </twig:Adminlte:Callout>
+            <twig:Adminlte:Card title="Goals" icon="bi bi-bullseye">
+                <twig:Adminlte:ProgressGroup label="Add products to cart" :current="160" :total="200" variant="primary" />
+                <twig:Adminlte:ProgressGroup label="Complete purchase" :current="310" :total="400" variant="success" />
+                <twig:Adminlte:ProgressGroup label="Visit premium page" :current="480" :total="800" variant="warning" />
+                <div class="mt-3">Avg. rating: <twig:Adminlte:Ratings :value="4.5" showValue /></div>
+            </twig:Adminlte:Card>
+        </div>
+    </div>
+
+    {# ⌘K command palette, indexed from the sidebar menu #}
+    <twig:Adminlte:CommandPalette />
 {% endblock %}

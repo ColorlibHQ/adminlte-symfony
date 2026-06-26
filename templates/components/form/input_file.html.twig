@@ -1,0 +1,11 @@
+{% set field_id = this.fieldId %}
+<div class="mb-3">
+    {% if label %}
+        <label for="{{ field_id }}" class="form-label">
+            {{ label }}{% if required %} <span class="text-danger">*</span>{% endif %}
+        </label>
+    {% endif %}
+    <input type="file" id="{{ field_id }}" name="{{ name }}{{ multiple ? '[]' }}" class="form-control"
+           {%- if accept %} accept="{{ accept }}"{% endif %}{{ multiple ? ' multiple' }}{{ required ? ' required' }}>
+    {% if help %}<div class="form-text">{{ help }}</div>{% endif %}
+</div>

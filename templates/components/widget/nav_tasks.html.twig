@@ -1,0 +1,21 @@
+<li class="nav-item dropdown">
+    <a class="nav-link" data-bs-toggle="dropdown" href="#" aria-label="Tasks">
+        <i class="{{ icon }}"></i>
+        {% if badge %}<span class="navbar-badge badge {{ badgeClass }}">{{ badge }}</span>{% endif %}
+    </a>
+    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-end">
+        <span class="dropdown-item dropdown-header">{{ items|length }} Tasks</span>
+        <div class="dropdown-divider"></div>
+        {% for item in items %}
+            <a href="{{ item.url ?? '#' }}" class="dropdown-item">
+                <p class="mb-1">{{ item.text }}<span class="float-end">{{ item.progress }}%</span></p>
+                <div class="progress progress-sm">
+                    <div class="progress-bar bg-{{ item.variant ?? 'primary' }}" style="width: {{ item.progress }}%;"
+                         role="progressbar" aria-valuenow="{{ item.progress }}" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+            </a>
+            <div class="dropdown-divider"></div>
+        {% endfor %}
+        <a href="{{ footerUrl ?? '#' }}" class="dropdown-item dropdown-footer">{{ footerText }}</a>
+    </div>
+</li>

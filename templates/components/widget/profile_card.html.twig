@@ -1,0 +1,13 @@
+<div class="card card-{{ variant }} card-outline">
+    <div class="card-body box-profile">
+        <div class="text-center">
+            {% if image %}
+                <img class="profile-user-img img-fluid img-circle rounded-circle" src="{{ image }}" alt="{{ name }}"
+                     style="width: 100px; height: 100px; object-fit: cover;">
+            {% endif %}
+        </div>
+        <h3 class="profile-username text-center">{{ name }}</h3>
+        {% if title %}<p class="text-body-secondary text-center">{{ title }}</p>{% endif %}
+        {% block content %}{% endblock %}
+    </div>
+</div>

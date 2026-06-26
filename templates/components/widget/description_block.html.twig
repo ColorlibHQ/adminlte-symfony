@@ -1,0 +1,9 @@
+<div class="description-block">
+    {% if percentage %}
+        <span class="description-percentage {{ this.trendClass }}">
+            <i class="bi {{ this.trendIcon }}"></i> {{ percentage }}
+        </span>
+    {% endif %}
+    <h5 class="description-header">{{ header }}</h5>
+    {% if text %}<span class="description-text">{{ text }}</span>{% endif %}
+</div>

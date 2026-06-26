@@ -1,0 +1,27 @@
+<li class="nav-item dropdown">
+    <a class="nav-link" data-bs-toggle="dropdown" href="#" aria-label="Messages">
+        <i class="{{ icon }}"></i>
+        {% if badge %}<span class="navbar-badge badge {{ badgeClass }}">{{ badge }}</span>{% endif %}
+    </a>
+    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-end">
+        {% for item in items %}
+            <a href="{{ item.url ?? '#' }}" class="dropdown-item">
+                <div class="d-flex align-items-center">
+                    {% if item.image ?? false %}
+                        <img src="{{ item.image }}" alt="{{ item.name }}" class="rounded-circle me-2"
+                             style="width: 40px; height: 40px; object-fit: cover;">
+                    {% endif %}
+                    <div class="flex-grow-1">
+                        <h3 class="dropdown-item-title mb-0 fs-6">
+                            {{ item.name }}
+                            {% if item.time ?? false %}<span class="float-end fs-7 text-body-secondary"><i class="bi bi-clock"></i> {{ item.time }}</span>{% endif %}
+                        </h3>
+                        <p class="fs-7 text-body-secondary mb-0">{{ item.message }}</p>
+                    </div>
+                </div>
+            </a>
+            <div class="dropdown-divider"></div>
+        {% endfor %}
+        <a href="{{ footerUrl ?? '#' }}" class="dropdown-item dropdown-footer">{{ footerText }}</a>
+    </div>
+</li>

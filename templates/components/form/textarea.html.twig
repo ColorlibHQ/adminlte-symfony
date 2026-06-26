@@ -1,0 +1,11 @@
+{% set field_id = this.fieldId %}
+<div class="mb-3">
+    {% if label %}
+        <label for="{{ field_id }}" class="form-label">
+            {{ label }}{% if required %} <span class="text-danger">*</span>{% endif %}
+        </label>
+    {% endif %}
+    <textarea id="{{ field_id }}" name="{{ name }}" class="form-control" rows="{{ rows }}"
+              {%- if placeholder %} placeholder="{{ placeholder }}"{% endif %}{{ required ? ' required' }}>{{ value }}</textarea>
+    {% if help %}<div class="form-text">{{ help }}</div>{% endif %}
+</div>

@@ -1,0 +1,80 @@
+<div class="modal fade" id="adminlte-command-palette" tabindex="-1" aria-hidden="true" aria-label="Command palette">
+    <div class="modal-dialog modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header p-2">
+                <div class="input-group">
+                    <span class="input-group-text bg-body border-0"><i class="bi bi-search"></i></span>
+                    <input type="text" id="adminlte-cp-input" class="form-control border-0 shadow-none"
+                           placeholder="Search…" aria-label="Search commands" autocomplete="off">
+                </div>
+            </div>
+            <div class="modal-body p-0">
+                <ul class="list-group list-group-flush" id="adminlte-cp-list">
+                    {% for cmd in this.commands %}
+                        <li>
+                            <a href="{{ cmd.url }}" class="list-group-item list-group-item-action d-flex align-items-center"
+                               data-label="{{ (cmd.label ~ ' ' ~ (cmd.group ?? ''))|lower }}">
+                                <i class="{{ cmd.icon ?? 'bi bi-arrow-return-right' }} me-2"></i>
+                                <span>{{ cmd.label }}</span>
+                                {% if cmd.group %}<span class="ms-auto badge text-bg-secondary">{{ cmd.group }}</span>{% endif %}
+                            </a>
+                        </li>
+                    {% endfor %}
+                    <li id="adminlte-cp-empty" class="list-group-item text-body-secondary text-center d-none">No commands found.</li>
+                </ul>
+            </div>
+            <div class="modal-footer p-2">
+                <small class="text-body-secondary">
+                    <kbd>↑</kbd> <kbd>↓</kbd> navigate · <kbd>↵</kbd> open · <kbd>esc</kbd> close · <kbd>⌘</kbd>/<kbd>Ctrl</kbd>+<kbd>K</kbd>
+                </small>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    (function () {
+        var el = document.getElementById('adminlte-command-palette');
+        if (!el || el.dataset.cpReady) { return; }
+        el.dataset.cpReady = '1';
+        var input = document.getElementById('adminlte-cp-input');
+        var empty = document.getElementById('adminlte-cp-empty');
+        var active = -1;
+
+        function visible() {
+            return Array.prototype.slice.call(el.querySelectorAll('#adminlte-cp-list a'))
+                .filter(function (a) { return !a.parentNode.classList.contains('d-none'); });
+        }
+        function highlight() {
+            var items = visible();
+            items.forEach(function (a, i) { a.classList.toggle('active', i === active); });
+            if (items[active]) { items[active].scrollIntoView({ block: 'nearest' }); }
+        }
+        function filter() {
+            var q = (input.value || '').trim().toLowerCase(), n = 0;
+            el.querySelectorAll('#adminlte-cp-list a').forEach(function (a) {
+                var hit = !q || (a.dataset.label || '').indexOf(q) !== -1;
+                a.parentNode.classList.toggle('d-none', !hit);
+                if (hit) { n++; }
+            });
+            empty.classList.toggle('d-none', n > 0);
+            active = -1;
+            highlight();
+        }
+        function open() {
+            if (!window.bootstrap || !window.bootstrap.Modal) { return; }
+            window.bootstrap.Modal.getOrCreateInstance(el).show();
+            el.addEventListener('shown.bs.modal', function () { input.value = ''; filter(); input.focus(); }, { once: true });
+        }
+
+        document.addEventListener('keydown', function (e) {
+            if ((e.metaKey || e.ctrlKey) && (e.key === 'k' || e.key === 'K')) { e.preventDefault(); open(); }
+        });
+        input.addEventListener('input', filter);
+        input.addEventListener('keydown', function (e) {
+            var items = visible();
+            if (e.key === 'ArrowDown') { e.preventDefault(); active = Math.min(active + 1, items.length - 1); highlight(); }
+            else if (e.key === 'ArrowUp') { e.preventDefault(); active = Math.max(active - 1, 0); highlight(); }
+            else if (e.key === 'Enter') { e.preventDefault(); var t = items[active] || items[0]; if (t) { window.location.href = t.getAttribute('href'); } }
+        });
+    })();
+</script>

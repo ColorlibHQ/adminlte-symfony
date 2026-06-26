@@ -1,0 +1,11 @@
+<div class="d-inline-flex align-items-center gap-1">
+    <span class="text-{{ variant }}">
+        {%- for star in this.stars -%}
+            {%- if star == 'full' -%}<i class="bi bi-star-fill"></i>
+            {%- elseif star == 'half' -%}<i class="bi bi-star-half"></i>
+            {%- else -%}<i class="bi bi-star"></i>
+            {%- endif -%}
+        {%- endfor -%}
+    </span>
+    {% if showValue %}<small class="text-body-secondary ms-1">{{ value }}/{{ max }}</small>{% endif %}
+</div>

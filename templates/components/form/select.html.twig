@@ -1,0 +1,14 @@
+{% set field_id = this.fieldId %}
+<div class="mb-3">
+    {% if label %}
+        <label for="{{ field_id }}" class="form-label">
+            {{ label }}{% if required %} <span class="text-danger">*</span>{% endif %}
+        </label>
+    {% endif %}
+    <select id="{{ field_id }}" name="{{ name }}{{ multiple ? '[]' }}" class="form-select"{{ multiple ? ' multiple' }}{{ required ? ' required' }}>
+        {% for option in options %}
+            <option value="{{ option.value }}"{{ option.value == value ? ' selected' }}>{{ option.label }}</option>
+        {% endfor %}
+    </select>
+    {% if help %}<div class="form-text">{{ help }}</div>{% endif %}
+</div>
