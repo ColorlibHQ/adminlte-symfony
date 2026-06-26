@@ -1,0 +1,16 @@
+/vendor/
+/composer.lock
+/.phpunit.result.cache
+/.phpunit.cache/
+/.php-cs-fixer.cache
+/phpstan.neon
+/.idea/
+/.vscode/
+.DS_Store
+*.log
+
+# Demo app build artifacts
+/demo/var/
+/demo/vendor/
+/demo/.env.local
+/demo/public/assets/

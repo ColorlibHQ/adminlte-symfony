@@ -1,0 +1,23 @@
+{% set logo = adminlte.logo %}
+{% set brand_url = adminlte.dashboardRoute ? path(adminlte.dashboardRoute) : '#' %}
+<aside class="app-sidebar bg-body-secondary shadow" data-bs-theme="dark">
+    <div class="sidebar-brand">
+        <a href="{{ brand_url }}" class="brand-link">
+            {% if logo.image %}
+                <img src="{{ logo.image }}" alt="{{ logo.alt }}" class="brand-image opacity-75 shadow">
+            {% endif %}
+            <span class="brand-text fw-light">{{ logo.text|raw }}</span>
+        </a>
+    </div>
+
+    <div class="sidebar-wrapper">
+        <nav class="mt-2">
+            <ul class="nav sidebar-menu flex-column" data-lte-toggle="treeview" role="navigation"
+                aria-label="Main navigation" data-accordion="false">
+                {% for item in this.items %}
+                    <twig:Adminlte:SidebarNavItem :item="item" />
+                {% endfor %}
+            </ul>
+        </nav>
+    </div>
+</aside>

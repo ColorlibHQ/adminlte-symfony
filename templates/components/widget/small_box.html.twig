@@ -1,0 +1,16 @@
+<div class="small-box text-bg-{{ variant }}">
+    <div class="inner">
+        <h3>{{ title }}</h3>
+        <p>{{ text }}</p>
+    </div>
+    {% if icon %}
+        <div class="small-box-icon">
+            <i class="{{ icon }}"></i>
+        </div>
+    {% endif %}
+    {% if url %}
+        <a href="{{ url }}" class="small-box-footer link-light">
+            {{ linkText }} <i class="bi bi-arrow-right-circle ms-1"></i>
+        </a>
+    {% endif %}
+</div>

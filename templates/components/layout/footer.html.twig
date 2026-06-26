@@ -1,0 +1,11 @@
+{% if adminlte.footer.enabled %}
+    <footer class="app-footer">
+        {% if adminlte.footer.version %}
+            <div class="float-end d-none d-sm-inline">{{ adminlte.footer.version }}</div>
+        {% endif %}
+        <strong>
+            {{ adminlte.footer.copyright ?? ('Copyright © ' ~ 'now'|date('Y') ~ ' ' ~ adminlte.title) }}.
+        </strong>
+        {{ adminlte.footer.text ?? 'All rights reserved.' }}
+    </footer>
+{% endif %}

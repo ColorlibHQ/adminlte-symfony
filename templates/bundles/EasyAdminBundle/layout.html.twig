@@ -1,0 +1,27 @@
+{#
+    AdminLTE 4 theme for EasyAdmin.
+
+    Activate by copying this file into your application at:
+        templates/bundles/EasyAdminBundle/layout.html.twig
+
+    It layers AdminLTE 4 + Bootstrap Icons styling onto EasyAdmin's own layout
+    and applies the AdminLTE color-mode system (synced with the standalone
+    bundle's toggle). For a fully restructured AdminLTE shell — sidebar, topbar,
+    config-driven menu — see the "EasyAdmin theme" section of the README; that
+    structural integration is being rolled out incrementally.
+
+    `head_stylesheets` and `body_javascripts` are stable EasyAdmin 5 blocks.
+#}
+{% extends '@EasyAdmin/layout.html.twig' %}
+
+{% block head_stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/admin-lte@4.0.2/dist/css/adminlte.min.css">
+    {{ include('@AdminLte/components/layout/_color_mode_script.html.twig') }}
+{% endblock %}
+
+{% block body_javascripts %}
+    {{ parent() }}
+    <script src="https://cdn.jsdelivr.net/npm/admin-lte@4.0.2/dist/js/adminlte.min.js"></script>
+{% endblock %}

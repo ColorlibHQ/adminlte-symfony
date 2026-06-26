@@ -1,0 +1,33 @@
+<script>
+    (function () {
+        var KEY = 'lte-theme'; // shared with the Vue/React/Angular ports
+        var DEFAULT = '{{ adminlte.colorMode }}'; // 'light' | 'dark' | 'auto'
+
+        function system() {
+            return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        }
+        function resolve(value) {
+            return value === 'auto' ? system() : value;
+        }
+        function apply(value) {
+            document.documentElement.setAttribute('data-bs-theme', resolve(value));
+        }
+
+        apply(localStorage.getItem(KEY) || DEFAULT);
+
+        // Toggle between light/dark and persist the explicit choice.
+        window.adminlteToggleColorMode = function () {
+            var current = resolve(localStorage.getItem(KEY) || DEFAULT);
+            var next = current === 'dark' ? 'light' : 'dark';
+            localStorage.setItem(KEY, next);
+            apply(next);
+            document.dispatchEvent(new CustomEvent('adminlte:color-mode', { detail: next }));
+        };
+
+        // Track the OS preference while the user is still on "auto".
+        if (!localStorage.getItem(KEY) && DEFAULT === 'auto' && window.matchMedia) {
+            window.matchMedia('(prefers-color-scheme: dark)')
+                .addEventListener('change', function () { apply('auto'); });
+        }
+    })();
+</script>

@@ -1,0 +1,8 @@
+<div class="alert alert-{{ variant }}{{ dismissible ? ' alert-dismissible fade show' }}" role="alert">
+    {% if icon %}<i class="{{ icon }} me-2"></i>{% endif %}
+    {% if title %}<strong class="alert-heading">{{ title }}</strong> {% endif %}
+    {% block content %}{% endblock %}
+    {% if dismissible %}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    {% endif %}
+</div>

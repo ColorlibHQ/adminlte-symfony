@@ -1,0 +1,23 @@
+{% set item = this.item %}
+{% if item.header %}
+    <li class="nav-header">{{ item.label }}</li>
+{% else %}
+    <li class="nav-item{{ item.active and item.hasChildren ? ' menu-open' }}">
+        <a href="{{ item.url ?? '#' }}" class="nav-link{{ item.active ? ' active' }}"
+           {{ item.target ? 'target="' ~ item.target ~ '"' : '' }}>
+            {% if item.icon %}<i class="nav-icon {{ item.icon }}"></i>{% endif %}
+            <p>
+                {{ item.label }}
+                {% if item.hasChildren %}<i class="nav-arrow bi bi-chevron-right"></i>{% endif %}
+                {% if item.badge %}<span class="nav-badge badge {{ item.badgeClass }}">{{ item.badge }}</span>{% endif %}
+            </p>
+        </a>
+        {% if item.hasChildren %}
+            <ul class="nav nav-treeview">
+                {% for child in item.children %}
+                    <twig:Adminlte:SidebarNavItem :item="child" />
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </li>
+{% endif %}

@@ -1,0 +1,92 @@
+{
+    "name": "colorlibhq/adminlte-symfony",
+    "description": "Official AdminLTE 4 integration for Symfony — Bootstrap 5.3, AssetMapper, Twig Components, config-driven sidebar menu, dark mode, and an optional EasyAdmin theme.",
+    "type": "symfony-bundle",
+    "keywords": [
+        "adminlte",
+        "symfony",
+        "symfony-bundle",
+        "admin",
+        "dashboard",
+        "bootstrap",
+        "twig-components",
+        "easyadmin",
+        "theme",
+        "backend"
+    ],
+    "homepage": "https://adminlte.io",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Colorlib",
+            "homepage": "https://colorlib.com"
+        },
+        {
+            "name": "AdminLTE Contributors",
+            "homepage": "https://github.com/ColorlibHQ/adminlte-symfony/graphs/contributors"
+        }
+    ],
+    "support": {
+        "issues": "https://github.com/ColorlibHQ/adminlte-symfony/issues",
+        "source": "https://github.com/ColorlibHQ/adminlte-symfony",
+        "docs": "https://github.com/ColorlibHQ/adminlte-symfony#readme"
+    },
+    "require": {
+        "php": ">=8.4",
+        "symfony/framework-bundle": "^8.1",
+        "symfony/twig-bundle": "^8.1",
+        "symfony/asset": "^8.1",
+        "symfony/asset-mapper": "^8.1",
+        "symfony/config": "^8.1",
+        "symfony/dependency-injection": "^8.1",
+        "symfony/http-kernel": "^8.1",
+        "symfony/stimulus-bundle": "^2.30",
+        "symfony/ux-twig-component": "^2.30",
+        "twig/twig": "^3.21"
+    },
+    "require-dev": {
+        "easycorp/easyadmin-bundle": "^5.1",
+        "friendsofphp/php-cs-fixer": "^3.88",
+        "phpstan/phpstan": "^2.1",
+        "phpstan/phpstan-symfony": "^2.0",
+        "phpunit/phpunit": "^12.4",
+        "symfony/browser-kit": "^8.1",
+        "symfony/css-selector": "^8.1",
+        "symfony/phpunit-bridge": "^8.1"
+    },
+    "suggest": {
+        "easycorp/easyadmin-bundle": "^5.1 — install to use the bundled AdminLTE theme for EasyAdmin (templates/bundles/EasyAdminBundle).",
+        "symfony/ux-icons": "Render Bootstrap Icons / Font Awesome inline via the <twig:ux:icon> component.",
+        "symfony/ux-chartjs": "Drop-in Chart.js charts for the dashboard widgets.",
+        "symfony/security-bundle": "Enables the `permission` voter filter on sidebar menu items."
+    },
+    "autoload": {
+        "psr-4": {
+            "ColorlibHQ\\AdminLteBundle\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "ColorlibHQ\\AdminLteBundle\\Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "lint": "php-cs-fixer fix --dry-run --diff",
+        "fix": "php-cs-fixer fix",
+        "analyse": "phpstan analyse --memory-limit=1G",
+        "test": "phpunit",
+        "check": [
+            "@lint",
+            "@analyse",
+            "@test"
+        ]
+    },
+    "config": {
+        "sort-packages": true,
+        "allow-plugins": {
+            "symfony/flex": true
+        }
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true
+}

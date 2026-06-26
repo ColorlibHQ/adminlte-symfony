@@ -1,0 +1,10 @@
+{% if url %}
+    <a href="{{ url }}" class="{{ this.buttonClass }}{{ disabled ? ' disabled' }}" role="button"
+       {{ disabled ? 'aria-disabled="true" tabindex="-1"' }}>
+        {% if icon %}<i class="{{ icon }} me-1"></i>{% endif %}{% block content %}{% endblock %}
+    </a>
+{% else %}
+    <button type="{{ type }}" class="{{ this.buttonClass }}"{{ disabled ? ' disabled' }}>
+        {% if icon %}<i class="{{ icon }} me-1"></i>{% endif %}{% block content %}{% endblock %}
+    </button>
+{% endif %}

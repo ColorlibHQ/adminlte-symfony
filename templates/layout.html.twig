@@ -1,0 +1,63 @@
+{#
+    AdminLTE 4 base layout — extend this from your pages:
+
+        {% extends '@AdminLte/layout.html.twig' %}
+        {% block page_title %}Dashboard{% endblock %}
+        {% block body %} ...content... {% endblock %}
+
+    Override {% block stylesheets %} / {% block javascripts %} to swap the CDN
+    defaults for AssetMapper (see README).
+#}
+<!doctype html>
+<html lang="{{ app.request.locale|default('en') }}" data-bs-theme="{{ adminlte.colorMode == 'dark' ? 'dark' : 'light' }}">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}{{ adminlte.title }}{% endblock %}</title>
+
+    {# SSR-safe theme init: must run before the body paints to avoid a flash. #}
+    {{ include('@AdminLte/components/layout/_color_mode_script.html.twig') }}
+
+    {% block stylesheets %}
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/admin-lte@4.0.2/dist/css/adminlte.min.css">
+    {% endblock %}
+</head>
+<body class="{{ adminlte.bodyClass }}">
+    <div class="app-wrapper">
+        {% block topbar %}<twig:Adminlte:Topbar />{% endblock %}
+
+        {% block sidebar %}<twig:Adminlte:Sidebar />{% endblock %}
+
+        <main class="app-main">
+            {% block content_header %}
+                <div class="app-content-header">
+                    <div class="container-fluid">
+                        <div class="row align-items-center">
+                            <div class="col-sm-6">
+                                <h3 class="mb-0">{% block page_title %}{% endblock %}</h3>
+                            </div>
+                            <div class="col-sm-6">
+                                {% block breadcrumb %}{% endblock %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endblock %}
+
+            <div class="app-content">
+                <div class="container-fluid">
+                    {% block body %}{% endblock %}
+                </div>
+            </div>
+        </main>
+
+        {% block footer %}<twig:Adminlte:Footer />{% endblock %}
+    </div>
+
+    {% block javascripts %}
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/admin-lte@4.0.2/dist/js/adminlte.min.js"></script>
+    {% endblock %}
+</body>
+</html>

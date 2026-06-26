@@ -1,0 +1,18 @@
+<div class="info-box">
+    {% if icon %}
+        <span class="info-box-icon text-bg-{{ variant }} shadow-sm">
+            <i class="{{ icon }}"></i>
+        </span>
+    {% endif %}
+    <div class="info-box-content">
+        <span class="info-box-text">{{ text }}</span>
+        <span class="info-box-number">{{ number }}</span>
+        {% if progress is not null %}
+            <div class="progress">
+                <div class="progress-bar text-bg-{{ variant }}" style="width: {{ progress }}%"
+                     role="progressbar" aria-valuenow="{{ progress }}" aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+            {% if progressText %}<span class="progress-description">{{ progressText }}</span>{% endif %}
+        {% endif %}
+    </div>
+</div>

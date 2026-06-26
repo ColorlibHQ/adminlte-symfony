@@ -1,0 +1,66 @@
+{#
+    Example dashboard showcasing the bundle's components.
+
+    Wire it from a controller:
+
+        #[Route('/admin', name: 'adminlte_demo_dashboard')]
+        public function dashboard(): Response
+        {
+            return $this->render('@AdminLte/demo/dashboard.html.twig');
+        }
+#}
+{% extends '@AdminLte/layout.html.twig' %}
+
+{% block title %}Dashboard · {{ adminlte.title }}{% endblock %}
+{% block page_title %}Dashboard{% endblock %}
+
+{% block breadcrumb %}
+    <ol class="breadcrumb float-sm-end">
+        <li class="breadcrumb-item"><a href="#">Home</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
+    </ol>
+{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-lg-3 col-6">
+            <twig:Adminlte:SmallBox title="150" text="New Orders" variant="primary" icon="bi bi-bag" url="#" />
+        </div>
+        <div class="col-lg-3 col-6">
+            <twig:Adminlte:SmallBox title="53%" text="Bounce Rate" variant="success" icon="bi bi-graph-up-arrow" url="#" />
+        </div>
+        <div class="col-lg-3 col-6">
+            <twig:Adminlte:SmallBox title="44" text="User Registrations" variant="warning" icon="bi bi-person-plus" url="#" />
+        </div>
+        <div class="col-lg-3 col-6">
+            <twig:Adminlte:SmallBox title="65" text="Unique Visitors" variant="danger" icon="bi bi-pie-chart" url="#" />
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <twig:Adminlte:Card title="Monthly Recap Report" icon="bi bi-bar-chart-line" variant="primary" outline collapsible>
+                <p class="mb-0">Welcome to the <strong>AdminLTE 4 Symfony</strong> bundle. Every block on this page
+                    is a Twig Component shipped by <code>colorlibhq/adminlte-symfony</code>.</p>
+            </twig:Adminlte:Card>
+
+            <twig:Adminlte:Alert variant="success" icon="bi bi-check-circle" title="Success!" dismissible>
+                The bundle is installed and the sidebar, topbar and dark-mode toggle are live.
+            </twig:Adminlte:Alert>
+        </div>
+
+        <div class="col-md-6">
+            <twig:Adminlte:InfoBox text="Bookmarks" number="41,410" icon="bi bi-bookmark-star"
+                variant="info" :progress="70" progressText="70% increase in 30 days" />
+
+            <twig:Adminlte:Card title="Quick Form" icon="bi bi-pencil-square">
+                <form>
+                    <twig:Adminlte:Input name="email" type="email" label="Email address"
+                        icon="bi bi-envelope" placeholder="you@example.com" required />
+                    <twig:Adminlte:Input name="title" label="Title" placeholder="Optional" help="Shown on your profile." />
+                    <twig:Adminlte:Button variant="primary" icon="bi bi-save" type="submit">Save changes</twig:Adminlte:Button>
+                </form>
+            </twig:Adminlte:Card>
+        </div>
+    </div>
+{% endblock %}
