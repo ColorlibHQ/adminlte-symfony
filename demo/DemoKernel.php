@@ -71,6 +71,11 @@ final class DemoKernel extends Kernel
 
         $container->extension('admin_lte', [
             'title' => 'AdminLTE 4 · Symfony',
+            'logo' => [
+                'image' => 'https://cdn.jsdelivr.net/npm/admin-lte@4.0.2/dist/assets/img/AdminLTELogo.png',
+                'text' => 'AdminLTE 4',
+                'alt' => 'AdminLTE Logo',
+            ],
             'dashboard_route' => 'demo_home',
             'footer' => ['version' => 'v4.0.2'],
             'menu' => self::menu(),
@@ -91,7 +96,7 @@ final class DemoKernel extends Kernel
      */
     public static function menu(): array
     {
-        return [
+        $menu = [
             ['header' => 'MAIN NAVIGATION'],
             ['label' => 'Dashboard', 'icon' => 'bi bi-speedometer', 'children' => [
                 ['label' => 'Dashboard v1', 'url' => '/'],
@@ -145,5 +150,18 @@ final class DemoKernel extends Kernel
             ['label' => 'Lockscreen', 'icon' => 'bi bi-lock', 'url' => '/lockscreen'],
             ['label' => 'AdminLTE.io', 'icon' => 'bi bi-globe', 'url' => 'https://adminlte.io', 'target' => '_blank'],
         ];
+
+        // Default each treeview child to the bi-circle icon, mirroring the core demo.
+        foreach ($menu as &$item) {
+            if (!empty($item['children'])) {
+                foreach ($item['children'] as &$child) {
+                    $child['icon'] ??= 'bi bi-circle';
+                }
+                unset($child);
+            }
+        }
+        unset($item);
+
+        return $menu;
     }
 }
