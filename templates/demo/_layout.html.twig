@@ -28,7 +28,8 @@
             {# Right links #}
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item">
-                    <a class="nav-link" data-widget="navbar-search" href="#" role="button" aria-label="Search">
+                    <a class="nav-link" href="#" role="button" aria-label="Search"
+                       data-bs-toggle="modal" data-bs-target="#adminlte-command-palette">
                         <i class="bi bi-search"></i>
                     </a>
                 </li>
@@ -111,4 +112,10 @@
             </ul>
         </div>
     </nav>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {# Command palette modal + ⌘K/Ctrl+K handler; the topbar search button opens it. #}
+    <twig:Adminlte:CommandPalette />
 {% endblock %}

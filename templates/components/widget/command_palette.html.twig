@@ -63,8 +63,12 @@
         function open() {
             if (!window.bootstrap || !window.bootstrap.Modal) { return; }
             window.bootstrap.Modal.getOrCreateInstance(el).show();
-            el.addEventListener('shown.bs.modal', function () { input.value = ''; filter(); input.focus(); }, { once: true });
         }
+
+        // Reset + focus whenever the palette opens — works for ⌘K/Ctrl+K AND any
+        // Bootstrap trigger (e.g. a topbar search button with
+        // data-bs-toggle="modal" data-bs-target="#adminlte-command-palette").
+        el.addEventListener('shown.bs.modal', function () { input.value = ''; filter(); input.focus(); });
 
         document.addEventListener('keydown', function (e) {
             if ((e.metaKey || e.ctrlKey) && (e.key === 'k' || e.key === 'K')) { e.preventDefault(); open(); }
