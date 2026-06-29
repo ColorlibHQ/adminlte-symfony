@@ -35,7 +35,9 @@ $slugs = [
 /** @var list<array{out:string,tpl:string,path:string}> $pages */
 $pages = [['out' => 'index.html', 'tpl' => 'dashboard.html.twig', 'path' => '/']];
 foreach ($slugs as $s) {
-    $pages[] = ['out' => $s.'.html', 'tpl' => $s.'.html.twig', 'path' => '/'.$s.'.html'];
+    // out = the file Cloudflare Pages serves at the extensionless path; path = the
+    // request path pushed for sidebar active-state (matches the extensionless menu URL).
+    $pages[] = ['out' => $s.'.html', 'tpl' => $s.'.html.twig', 'path' => '/'.$s];
 }
 
 $kernel = new DemoKernel('prod', false);
