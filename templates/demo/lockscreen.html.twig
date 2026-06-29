@@ -1,0 +1,67 @@
+{#
+    Standalone lockscreen — mirrors AdminLTE core `examples/lockscreen.html`.
+
+    Self-contained: does NOT extend @AdminLte/layout.html.twig. Wire it from a
+    controller, e.g.:
+
+        return $this->render('@AdminLte/demo/lockscreen.html.twig');
+
+    Avatar uses a Gravatar placeholder (identicon fallback).
+#}
+<!doctype html>
+<html lang="en" data-bs-theme="light">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Lockscreen · AdminLTE 4 · Symfony</title>
+    {{ include('@AdminLte/components/layout/_color_mode_script.html.twig') }}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/admin-lte@4.0.2/dist/css/adminlte.min.css">
+</head>
+<body class="lockscreen bg-body-secondary">
+    <div class="lockscreen-wrapper">
+        <div class="lockscreen-logo">
+            <a href="/"><b>Admin</b>LTE</a>
+        </div>
+
+        <div class="lockscreen-name">John Doe</div>
+
+        <div class="lockscreen-item">
+            <div class="lockscreen-image">
+                <img src="https://www.gravatar.com/avatar/00000000000000000000000000000000?s=128&d=identicon" alt="User Image" />
+            </div>
+
+            <form class="lockscreen-credentials">
+                <div class="input-group">
+                    <input type="password" class="form-control shadow-none" placeholder="password" />
+                    <div class="input-group-text border-0 bg-transparent px-1">
+                        <button type="button" class="btn shadow-none">
+                            <i class="bi bi-box-arrow-right text-body-secondary"></i>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <div class="help-block text-center">Enter your password to retrieve your session</div>
+        <div class="text-center">
+            <a href="/login.html" class="text-decoration-none">Or sign in as a different user</a>
+        </div>
+        <div class="lockscreen-footer text-center">
+            Copyright © 2014-2026 &nbsp;
+            <b
+                ><a
+                    href="https://adminlte.io"
+                    class="link-primary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover"
+                    >AdminLTE.io</a
+                ></b
+            >
+            <br />
+            All rights reserved
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/admin-lte@4.0.2/dist/js/adminlte.min.js"></script>
+</body>
+</html>
