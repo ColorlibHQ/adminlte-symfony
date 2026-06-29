@@ -10,6 +10,8 @@
 [![Bootstrap 5.3](https://img.shields.io/badge/Bootstrap-5.3-7952B3.svg?logo=bootstrap&logoColor=white)](https://getbootstrap.com)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
+**🔗 [Live demo](https://adminlte-symfony.pages.dev)** · **📚 [Documentation](https://docs.adminlte.io/symfony/introduction)**
+
 </div>
 
 ---
