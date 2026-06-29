@@ -1,0 +1,228 @@
+{#
+    UI General — buttons, badges, alerts, callouts and pagination.
+    Mirrors the relevant sections of AdminLTE 4 dist/ui/general.html.
+
+    Wire it from a controller:
+
+        #[Route('/admin/ui/general', name: 'adminlte_demo_ui_general')]
+        public function general(): Response
+        {
+            return $this->render('@AdminLte/demo/ui-general.html.twig');
+        }
+#}
+{% extends '@AdminLte/layout.html.twig' %}
+
+{% block title %}General UI · {{ adminlte.title }}{% endblock %}
+{% block page_title %}General UI{% endblock %}
+
+{% block breadcrumb %}
+    <ol class="breadcrumb float-sm-end">
+        <li class="breadcrumb-item"><a href="/">Home</a></li>
+        <li class="breadcrumb-item">UI Elements</li>
+        <li class="breadcrumb-item active" aria-current="page">General</li>
+    </ol>
+{% endblock %}
+
+{% block body %}
+    <div class="row g-4">
+        <div class="col-12">
+            <twig:Adminlte:Callout variant="info">
+                For detailed documentation of components visit
+                <a href="https://getbootstrap.com/docs/5.3/components/" target="_blank"
+                   rel="noopener noreferrer" class="callout-link">Bootstrap Components</a>
+            </twig:Adminlte:Callout>
+        </div>
+
+        <div class="col-md-6">
+            {# ---- Alerts (component) ---- #}
+            <twig:Adminlte:Card title="Alert" variant="success" outline>
+                <twig:Adminlte:Alert variant="primary">
+                    A simple primary alert with <a href="#" class="alert-link">an example link</a>. Give it a click if you like.
+                </twig:Adminlte:Alert>
+                <twig:Adminlte:Alert variant="secondary">
+                    A simple secondary alert with <a href="#" class="alert-link">an example link</a>. Give it a click if you like.
+                </twig:Adminlte:Alert>
+                <twig:Adminlte:Alert variant="success">
+                    A simple success alert with <a href="#" class="alert-link">an example link</a>. Give it a click if you like.
+                </twig:Adminlte:Alert>
+                <twig:Adminlte:Alert variant="danger">
+                    A simple danger alert with <a href="#" class="alert-link">an example link</a>. Give it a click if you like.
+                </twig:Adminlte:Alert>
+                <twig:Adminlte:Alert variant="warning">
+                    A simple warning alert with <a href="#" class="alert-link">an example link</a>. Give it a click if you like.
+                </twig:Adminlte:Alert>
+                <twig:Adminlte:Alert variant="info">
+                    A simple info alert with <a href="#" class="alert-link">an example link</a>. Give it a click if you like.
+                </twig:Adminlte:Alert>
+                <twig:Adminlte:Alert variant="light">
+                    A simple light alert with <a href="#" class="alert-link">an example link</a>. Give it a click if you like.
+                </twig:Adminlte:Alert>
+                <twig:Adminlte:Alert variant="dark">
+                    A simple dark alert with <a href="#" class="alert-link">an example link</a>. Give it a click if you like.
+                </twig:Adminlte:Alert>
+                <twig:Adminlte:Alert variant="success" icon="bi bi-check-circle" title="Well done!" dismissible>
+                    You successfully read this important alert message.
+                </twig:Adminlte:Alert>
+            </twig:Adminlte:Card>
+
+            {# ---- Callouts (component) ---- #}
+            <twig:Adminlte:Card title="Callout" variant="info" outline>
+                <twig:Adminlte:Callout variant="danger" title="I am a danger callout!">
+                    There is a problem that we need to fix. A red callout indicates a dangerous or potentially negative action.
+                </twig:Adminlte:Callout>
+                <twig:Adminlte:Callout variant="info" title="I am an info callout!">
+                    Follow the steps to continue to payment.
+                </twig:Adminlte:Callout>
+                <twig:Adminlte:Callout variant="warning" title="I am a warning callout!">
+                    This is a regular notification that you should pay attention to.
+                </twig:Adminlte:Callout>
+                <twig:Adminlte:Callout variant="success" title="I am a success callout!">
+                    This is a great success message that everything is in order.
+                </twig:Adminlte:Callout>
+            </twig:Adminlte:Card>
+
+            {# ---- Badges (raw Bootstrap markup) ---- #}
+            <twig:Adminlte:Card title="Badge" variant="warning" outline>
+                <h1>Example heading <span class="badge bg-secondary">New</span></h1>
+                <h2>Example heading <span class="badge bg-secondary">New</span></h2>
+                <h3>Example heading <span class="badge bg-secondary">New</span></h3>
+                <h4>Example heading <span class="badge bg-secondary">New</span></h4>
+                <h5>Example heading <span class="badge bg-secondary">New</span></h5>
+                <h6>Example heading <span class="badge bg-secondary">New</span></h6>
+                <hr>
+                <button type="button" class="btn btn-primary">
+                    Notifications <span class="badge text-bg-secondary">4</span>
+                </button>
+                <hr>
+                <button type="button" class="btn btn-primary position-relative">
+                    Inbox
+                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                        99+
+                        <span class="visually-hidden">unread messages</span>
+                    </span>
+                </button>
+                <hr>
+                <span class="badge text-bg-primary">Primary</span>
+                <span class="badge text-bg-secondary">Secondary</span>
+                <span class="badge text-bg-success">Success</span>
+                <span class="badge text-bg-danger">Danger</span>
+                <span class="badge text-bg-warning">Warning</span>
+                <span class="badge text-bg-info">Info</span>
+                <span class="badge text-bg-light">Light</span>
+                <span class="badge text-bg-dark">Dark</span>
+                <hr>
+                <span class="badge rounded-pill text-bg-primary">Primary</span>
+                <span class="badge rounded-pill text-bg-secondary">Secondary</span>
+                <span class="badge rounded-pill text-bg-success">Success</span>
+                <span class="badge rounded-pill text-bg-danger">Danger</span>
+                <span class="badge rounded-pill text-bg-warning">Warning</span>
+                <span class="badge rounded-pill text-bg-info">Info</span>
+                <span class="badge rounded-pill text-bg-light">Light</span>
+                <span class="badge rounded-pill text-bg-dark">Dark</span>
+            </twig:Adminlte:Card>
+        </div>
+
+        <div class="col-md-6">
+            {# ---- Buttons (component) ---- #}
+            <twig:Adminlte:Card title="Button" variant="danger" outline>
+                <div class="d-flex flex-wrap gap-2">
+                    <twig:Adminlte:Button variant="primary">Primary</twig:Adminlte:Button>
+                    <twig:Adminlte:Button variant="secondary">Secondary</twig:Adminlte:Button>
+                    <twig:Adminlte:Button variant="success">Success</twig:Adminlte:Button>
+                    <twig:Adminlte:Button variant="danger">Danger</twig:Adminlte:Button>
+                    <twig:Adminlte:Button variant="warning">Warning</twig:Adminlte:Button>
+                    <twig:Adminlte:Button variant="info">Info</twig:Adminlte:Button>
+                    <twig:Adminlte:Button variant="light">Light</twig:Adminlte:Button>
+                    <twig:Adminlte:Button variant="dark">Dark</twig:Adminlte:Button>
+                    <twig:Adminlte:Button variant="link">Link</twig:Adminlte:Button>
+                </div>
+                <hr>
+                <div class="d-flex flex-wrap gap-2">
+                    <twig:Adminlte:Button variant="primary" disabled>Primary (disabled)</twig:Adminlte:Button>
+                    <twig:Adminlte:Button variant="secondary" disabled>Secondary (disabled)</twig:Adminlte:Button>
+                    <twig:Adminlte:Button variant="success" disabled>Success (disabled)</twig:Adminlte:Button>
+                    <twig:Adminlte:Button variant="danger" disabled>Danger (disabled)</twig:Adminlte:Button>
+                </div>
+                <hr>
+                <div class="d-flex flex-wrap gap-2">
+                    <twig:Adminlte:Button variant="primary" outline>Primary</twig:Adminlte:Button>
+                    <twig:Adminlte:Button variant="secondary" outline>Secondary</twig:Adminlte:Button>
+                    <twig:Adminlte:Button variant="success" outline>Success</twig:Adminlte:Button>
+                    <twig:Adminlte:Button variant="danger" outline>Danger</twig:Adminlte:Button>
+                    <twig:Adminlte:Button variant="warning" outline>Warning</twig:Adminlte:Button>
+                    <twig:Adminlte:Button variant="info" outline>Info</twig:Adminlte:Button>
+                    <twig:Adminlte:Button variant="light" outline>Light</twig:Adminlte:Button>
+                    <twig:Adminlte:Button variant="dark" outline>Dark</twig:Adminlte:Button>
+                </div>
+                <hr>
+                <div class="d-flex flex-wrap align-items-center gap-2">
+                    <twig:Adminlte:Button variant="primary" size="lg" icon="bi bi-save">Large button</twig:Adminlte:Button>
+                    <twig:Adminlte:Button variant="warning" size="sm">Small button</twig:Adminlte:Button>
+                    <twig:Adminlte:Button variant="success" url="#" icon="bi bi-box-arrow-up-right">Link button</twig:Adminlte:Button>
+                </div>
+            </twig:Adminlte:Card>
+
+            {# ---- Button group (raw Bootstrap markup) ---- #}
+            <twig:Adminlte:Card title="Button Group" variant="info" outline>
+                <div class="btn-group mb-2" role="group" aria-label="Basic example">
+                    <button type="button" class="btn btn-primary">Left</button>
+                    <button type="button" class="btn btn-primary">Middle</button>
+                    <button type="button" class="btn btn-primary">Right</button>
+                </div>
+                <br>
+                <div class="btn-group mb-2" role="group" aria-label="Basic mixed styles example">
+                    <button type="button" class="btn btn-danger">Left</button>
+                    <button type="button" class="btn btn-warning">Middle</button>
+                    <button type="button" class="btn btn-success">Right</button>
+                </div>
+                <br>
+                <div class="btn-group mb-2" role="group" aria-label="Basic outlined example">
+                    <button type="button" class="btn btn-outline-primary">Left</button>
+                    <button type="button" class="btn btn-outline-primary">Middle</button>
+                    <button type="button" class="btn btn-outline-primary">Right</button>
+                </div>
+            </twig:Adminlte:Card>
+
+            {# ---- Pagination (raw Bootstrap markup) ---- #}
+            <twig:Adminlte:Card title="Pagination" variant="info" outline>
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination">
+                        <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+                        <li class="page-item"><a class="page-link" href="#">1</a></li>
+                        <li class="page-item"><a class="page-link" href="#">2</a></li>
+                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                        <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                    </ul>
+                </nav>
+                <hr>
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination">
+                        <li class="page-item">
+                            <a class="page-link" href="#" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        </li>
+                        <li class="page-item"><a class="page-link" href="#">1</a></li>
+                        <li class="page-item"><a class="page-link" href="#">2</a></li>
+                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                        <li class="page-item">
+                            <a class="page-link" href="#" aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+                <hr>
+                <nav aria-label="Disabled and active states">
+                    <ul class="pagination">
+                        <li class="page-item disabled"><a class="page-link">Previous</a></li>
+                        <li class="page-item active" aria-current="page"><a class="page-link" href="#">1</a></li>
+                        <li class="page-item"><a class="page-link" href="#">2</a></li>
+                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                        <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                    </ul>
+                </nav>
+            </twig:Adminlte:Card>
+        </div>
+    </div>
+{% endblock %}

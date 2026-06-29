@@ -1,0 +1,191 @@
+{#
+    Info Box widgets — mirrors AdminLTE 4 dist/widgets/info-box.html.
+
+    Wire it from a controller:
+
+        #[Route('/admin/widgets/info-box', name: 'adminlte_demo_widgets_info_box')]
+        public function infoBox(): Response
+        {
+            return $this->render('@AdminLte/demo/widgets-info-box.html.twig');
+        }
+#}
+{% extends '@AdminLte/layout.html.twig' %}
+
+{% block title %}Info Box · {{ adminlte.title }}{% endblock %}
+{% block page_title %}Info Box{% endblock %}
+
+{% block breadcrumb %}
+    <ol class="breadcrumb float-sm-end">
+        <li class="breadcrumb-item"><a href="/">Home</a></li>
+        <li class="breadcrumb-item">Widgets</li>
+        <li class="breadcrumb-item active" aria-current="page">Info Box</li>
+    </ol>
+{% endblock %}
+
+{% block body %}
+    <h5 class="mb-2">Info Box</h5>
+    <div class="row">
+        <div class="col-12 col-sm-6 col-md-3">
+            <twig:Adminlte:InfoBox text="CPU Traffic" number="10%" icon="bi bi-gear-fill" variant="primary" />
+        </div>
+        <div class="col-12 col-sm-6 col-md-3">
+            <twig:Adminlte:InfoBox text="Sales" number="760" icon="bi bi-cart-fill" variant="success" />
+        </div>
+        <div class="col-12 col-sm-6 col-md-3">
+            <twig:Adminlte:InfoBox text="New Members" number="2,000" icon="bi bi-people-fill" variant="warning" />
+        </div>
+        <div class="col-12 col-sm-6 col-md-3">
+            <twig:Adminlte:InfoBox text="Likes" number="41,410" icon="bi bi-hand-thumbs-up-fill" variant="danger" />
+        </div>
+    </div>
+
+    <h5 class="mt-4 mb-2">Info Box With Progress</h5>
+    <div class="row">
+        <div class="col-12 col-sm-6 col-md-3">
+            <twig:Adminlte:InfoBox text="Bookmarks" number="41,410" icon="bi bi-bookmark-fill"
+                variant="info" :progress="70" progressText="70% Increase in 30 Days" />
+        </div>
+        <div class="col-12 col-sm-6 col-md-3">
+            <twig:Adminlte:InfoBox text="Likes" number="41,410" icon="bi bi-hand-thumbs-up"
+                variant="success" :progress="70" progressText="70% Increase in 30 Days" />
+        </div>
+        <div class="col-12 col-sm-6 col-md-3">
+            <twig:Adminlte:InfoBox text="Events" number="41,410" icon="bi bi-calendar3"
+                variant="warning" :progress="70" progressText="70% Increase in 30 Days" />
+        </div>
+        <div class="col-12 col-sm-6 col-md-3">
+            <twig:Adminlte:InfoBox text="Comments" number="41,410" icon="bi bi-chat-text-fill"
+                variant="danger" :progress="70" progressText="70% Increase in 30 Days" />
+        </div>
+    </div>
+
+    {# bg-* and bg-gradient variants are not expressible through the InfoBox component
+       props, so they are reproduced verbatim from the core markup. #}
+    <h5 class="mt-4 mb-2">Info Box With <code>.text-bg-*</code></h5>
+    <div class="row">
+        <div class="col-md-3 col-sm-6 col-12">
+            <div class="info-box text-bg-primary">
+                <span class="info-box-icon">
+                    <i class="bi bi-bookmark-fill"></i>
+                </span>
+                <div class="info-box-content">
+                    <span class="info-box-text">Bookmarks</span>
+                    <span class="info-box-number">41,410</span>
+                    <div class="progress">
+                        <div class="progress-bar" style="width: 70%"></div>
+                    </div>
+                    <span class="progress-description">70% Increase in 30 Days</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-6 col-12">
+            <div class="info-box text-bg-success">
+                <span class="info-box-icon">
+                    <i class="bi bi-hand-thumbs-up"></i>
+                </span>
+                <div class="info-box-content">
+                    <span class="info-box-text">Likes</span>
+                    <span class="info-box-number">41,410</span>
+                    <div class="progress">
+                        <div class="progress-bar" style="width: 70%"></div>
+                    </div>
+                    <span class="progress-description">70% Increase in 30 Days</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-6 col-12">
+            <div class="info-box text-bg-warning">
+                <span class="info-box-icon">
+                    <i class="bi bi-calendar3"></i>
+                </span>
+                <div class="info-box-content">
+                    <span class="info-box-text">Events</span>
+                    <span class="info-box-number">41,410</span>
+                    <div class="progress">
+                        <div class="progress-bar" style="width: 70%"></div>
+                    </div>
+                    <span class="progress-description">70% Increase in 30 Days</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-6 col-12">
+            <div class="info-box text-bg-danger">
+                <span class="info-box-icon">
+                    <i class="bi bi-chat-text-fill"></i>
+                </span>
+                <div class="info-box-content">
+                    <span class="info-box-text">Comments</span>
+                    <span class="info-box-number">41,410</span>
+                    <div class="progress">
+                        <div class="progress-bar" style="width: 70%"></div>
+                    </div>
+                    <span class="progress-description">70% Increase in 30 Days</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <h5 class="mt-4 mb-2">Info Box With <code>bg-gradient</code></h5>
+    <div class="row">
+        <div class="col-md-3 col-sm-6 col-12">
+            <div class="info-box text-bg-primary bg-gradient">
+                <span class="info-box-icon">
+                    <i class="bi bi-bookmark-fill"></i>
+                </span>
+                <div class="info-box-content">
+                    <span class="info-box-text">Bookmarks</span>
+                    <span class="info-box-number">41,410</span>
+                    <div class="progress">
+                        <div class="progress-bar" style="width: 70%"></div>
+                    </div>
+                    <span class="progress-description">70% Increase in 30 Days</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-6 col-12">
+            <div class="info-box text-bg-success bg-gradient">
+                <span class="info-box-icon">
+                    <i class="bi bi-hand-thumbs-up"></i>
+                </span>
+                <div class="info-box-content">
+                    <span class="info-box-text">Likes</span>
+                    <span class="info-box-number">41,410</span>
+                    <div class="progress">
+                        <div class="progress-bar" style="width: 70%"></div>
+                    </div>
+                    <span class="progress-description">70% Increase in 30 Days</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-6 col-12">
+            <div class="info-box text-bg-warning bg-gradient">
+                <span class="info-box-icon">
+                    <i class="bi bi-calendar3"></i>
+                </span>
+                <div class="info-box-content">
+                    <span class="info-box-text">Events</span>
+                    <span class="info-box-number">41,410</span>
+                    <div class="progress">
+                        <div class="progress-bar" style="width: 70%"></div>
+                    </div>
+                    <span class="progress-description">70% Increase in 30 Days</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-6 col-12">
+            <div class="info-box text-bg-danger bg-gradient">
+                <span class="info-box-icon">
+                    <i class="bi bi-chat-text-fill"></i>
+                </span>
+                <div class="info-box-content">
+                    <span class="info-box-text">Comments</span>
+                    <span class="info-box-number">41,410</span>
+                    <div class="progress">
+                        <div class="progress-bar" style="width: 70%"></div>
+                    </div>
+                    <span class="progress-description">70% Increase in 30 Days</span>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

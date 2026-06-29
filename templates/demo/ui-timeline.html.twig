@@ -1,0 +1,79 @@
+{#
+    UI Timeline — mirrors AdminLTE 4 dist/ui/timeline.html using the bundle's
+    Timeline and TimelineItem components. Rich content (footers, media) is passed
+    through each item's default slot.
+
+    Wire it from a controller:
+
+        #[Route('/admin/ui/timeline', name: 'adminlte_demo_ui_timeline')]
+        public function timeline(): Response
+        {
+            return $this->render('@AdminLte/demo/ui-timeline.html.twig');
+        }
+#}
+{% extends '@AdminLte/layout.html.twig' %}
+
+{% block title %}Timeline · {{ adminlte.title }}{% endblock %}
+{% block page_title %}Timeline{% endblock %}
+
+{% block breadcrumb %}
+    <ol class="breadcrumb float-sm-end">
+        <li class="breadcrumb-item"><a href="/">Home</a></li>
+        <li class="breadcrumb-item">UI Elements</li>
+        <li class="breadcrumb-item active" aria-current="page">Timeline</li>
+    </ol>
+{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-md-12">
+            <twig:Adminlte:Timeline>
+                <twig:Adminlte:TimelineItem label="10 Feb. 2023" variant="danger" />
+
+                <twig:Adminlte:TimelineItem icon="bi bi-envelope" variant="primary" time="12:05"
+                    header="Support Team sent you an email">
+                    Etsy doostang zoodles disqus groupon greplin oooj voxy zoodles, weebly ning
+                    heekya handango imeem plugg dopplr jibjab, movity jajah plickers sifteo
+                    edmodo ifttt zimbra. Babblely odeo kaboodle quora plaxo ideeli hulu weebly
+                    balihoo...
+                    <div class="timeline-footer mt-2">
+                        <a class="btn btn-primary btn-sm" href="#">Read more</a>
+                        <a class="btn btn-danger btn-sm" href="#">Delete</a>
+                    </div>
+                </twig:Adminlte:TimelineItem>
+
+                <twig:Adminlte:TimelineItem icon="bi bi-person" variant="success" time="5 mins ago"
+                    header="Sarah Young accepted your friend request" />
+
+                <twig:Adminlte:TimelineItem icon="bi bi-chat-text-fill" variant="warning" time="27 mins ago"
+                    header="Jay White commented on your post">
+                    Take me to your leader! Switzerland is small and neutral! We are more like
+                    Germany, ambitious and misunderstood!
+                    <div class="timeline-footer mt-2">
+                        <a class="btn btn-warning btn-sm" href="#">View comment</a>
+                    </div>
+                </twig:Adminlte:TimelineItem>
+
+                <twig:Adminlte:TimelineItem label="3 Jan. 2023" variant="success" />
+
+                <twig:Adminlte:TimelineItem icon="bi bi-camera" variant="primary" time="2 days ago"
+                    header="Mina Lee uploaded new photos">
+                    <img src="https://www.gravatar.com/avatar/00000000000000000000000000000001?s=128&d=identicon" class="rounded me-1 mb-1" width="96" height="96" alt="Photo">
+                    <img src="https://www.gravatar.com/avatar/00000000000000000000000000000002?s=128&d=identicon" class="rounded me-1 mb-1" width="96" height="96" alt="Photo">
+                    <img src="https://www.gravatar.com/avatar/00000000000000000000000000000003?s=128&d=identicon" class="rounded me-1 mb-1" width="96" height="96" alt="Photo">
+                    <img src="https://www.gravatar.com/avatar/00000000000000000000000000000004?s=128&d=identicon" class="rounded me-1 mb-1" width="96" height="96" alt="Photo">
+                </twig:Adminlte:TimelineItem>
+
+                <twig:Adminlte:TimelineItem icon="bi bi-camera-film" variant="info" time="5 days ago"
+                    header="Mr. Doe shared a video">
+                    <div class="ratio ratio-16x9">
+                        <iframe src="https://www.youtube.com/embed/tMWkeBIohBs" title="Shared video" allowfullscreen></iframe>
+                    </div>
+                    <div class="timeline-footer mt-2">
+                        <a href="#" class="btn btn-sm text-bg-warning">See comments</a>
+                    </div>
+                </twig:Adminlte:TimelineItem>
+            </twig:Adminlte:Timeline>
+        </div>
+    </div>
+{% endblock %}

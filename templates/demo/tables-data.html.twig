@@ -1,0 +1,157 @@
+{#
+    Data table — static counterpart to AdminLTE 4 dist/tables/data.html.
+
+    The core page renders this grid with Tabulator (vanilla JS, no jQuery). This
+    template ships a static, server-rendered table with a filter box, sortable
+    column headers and pagination controls instead, so the page is useful without
+    any client-side dependency.
+
+    To make it a live, sortable/searchable grid, wire a JS datatable
+    (e.g. Tabulator 6 or DataTables) against the `#users-table` element below — see
+    the commented hint in the card body.
+
+    Wire it from a controller:
+
+        #[Route('/admin/tables/data', name: 'adminlte_demo_tables_data')]
+        public function dataTable(): Response
+        {
+            return $this->render('@AdminLte/demo/tables-data.html.twig');
+        }
+#}
+{% extends '@AdminLte/layout.html.twig' %}
+
+{% block title %}Data Table · {{ adminlte.title }}{% endblock %}
+{% block page_title %}Data Table{% endblock %}
+
+{% block breadcrumb %}
+    <ol class="breadcrumb float-sm-end">
+        <li class="breadcrumb-item"><a href="/">Home</a></li>
+        <li class="breadcrumb-item">Tables</li>
+        <li class="breadcrumb-item active" aria-current="page">Data</li>
+    </ol>
+{% endblock %}
+
+{% block body %}
+    {% set users = [
+        { id: 1,  name: 'Olivia Bennett',   email: 'olivia@example.com',    role: 'Admin',  status: 'Active',    joined: '2024-03-12' },
+        { id: 2,  name: 'Liam Carter',      email: 'liam@example.com',      role: 'Editor', status: 'Active',    joined: '2024-04-08' },
+        { id: 3,  name: 'Emma Dawson',      email: 'emma@example.com',      role: 'Viewer', status: 'Invited',   joined: '2024-06-21' },
+        { id: 4,  name: 'Noah Evans',       email: 'noah@example.com',      role: 'Editor', status: 'Suspended', joined: '2024-07-15' },
+        { id: 5,  name: 'Ava Foster',       email: 'ava@example.com',       role: 'Admin',  status: 'Active',    joined: '2024-08-30' },
+        { id: 6,  name: 'Ethan Grant',      email: 'ethan@example.com',     role: 'Viewer', status: 'Active',    joined: '2024-09-14' },
+        { id: 7,  name: 'Sophia Hayes',     email: 'sophia@example.com',    role: 'Editor', status: 'Active',    joined: '2024-10-02' },
+        { id: 8,  name: 'Mason Ingram',     email: 'mason@example.com',     role: 'Viewer', status: 'Invited',   joined: '2024-11-19' },
+        { id: 9,  name: 'Isabella Jones',   email: 'isabella@example.com',  role: 'Admin',  status: 'Active',    joined: '2025-01-05' },
+        { id: 10, name: 'Lucas Klein',      email: 'lucas@example.com',     role: 'Viewer', status: 'Suspended', joined: '2025-02-18' },
+        { id: 11, name: 'Mia Lopez',        email: 'mia@example.com',       role: 'Editor', status: 'Active',    joined: '2025-03-22' },
+        { id: 12, name: 'Logan Moore',      email: 'logan@example.com',     role: 'Viewer', status: 'Active',    joined: '2025-04-09' },
+        { id: 13, name: 'Charlotte Nelson', email: 'charlotte@example.com', role: 'Admin',  status: 'Active',    joined: '2025-04-27' },
+        { id: 14, name: 'Henry Owens',      email: 'henry@example.com',     role: 'Editor', status: 'Invited',   joined: '2025-05-11' },
+        { id: 15, name: 'Amelia Price',     email: 'amelia@example.com',    role: 'Viewer', status: 'Active',    joined: '2025-05-17' }
+    ] %}
+    {% set status_variants = { Active: 'success', Invited: 'info', Suspended: 'secondary' } %}
+
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">Users</h3>
+            <div class="card-tools">
+                <div class="input-group input-group-sm" style="width: 16rem">
+                    <span class="input-group-text">
+                        <i class="bi bi-search" aria-hidden="true"></i>
+                    </span>
+                    <input id="table-filter" type="search" class="form-control"
+                           placeholder="Filter rows…" aria-label="Filter rows">
+                </div>
+            </div>
+        </div>
+
+        <div class="card-body">
+            <div class="d-flex gap-2 mb-3">
+                <button id="export-csv" type="button" class="btn btn-sm btn-outline-secondary">
+                    <i class="bi bi-filetype-csv me-1" aria-hidden="true"></i> Export CSV
+                </button>
+                <button id="export-json" type="button" class="btn btn-sm btn-outline-secondary">
+                    <i class="bi bi-filetype-json me-1" aria-hidden="true"></i> Export JSON
+                </button>
+                <button id="print-table" type="button" class="btn btn-sm btn-outline-secondary">
+                    <i class="bi bi-printer me-1" aria-hidden="true"></i> Print
+                </button>
+            </div>
+
+            {#
+                Static, server-rendered table. To upgrade this into a live grid
+                (sorting, search, pagination handled client-side), initialise a
+                vanilla-JS datatable such as Tabulator 6 against #users-table:
+
+                    new Tabulator('#users-table', { ... });
+
+                The sortable header buttons and pagination below are visual only.
+            #}
+            <div class="table-responsive" id="users-table">
+                <table class="table table-striped table-hover align-middle mb-0">
+                    <thead>
+                        <tr>
+                            <th style="width: 10px">
+                                <button type="button" class="btn btn-link btn-sm text-body text-decoration-none p-0">
+                                    # <i class="bi bi-arrow-down-up small" aria-hidden="true"></i>
+                                </button>
+                            </th>
+                            <th>
+                                <button type="button" class="btn btn-link btn-sm text-body text-decoration-none p-0" aria-sort="ascending">
+                                    Name <i class="bi bi-sort-alpha-down small" aria-hidden="true"></i>
+                                </button>
+                            </th>
+                            <th>
+                                <button type="button" class="btn btn-link btn-sm text-body text-decoration-none p-0">
+                                    Email <i class="bi bi-arrow-down-up small" aria-hidden="true"></i>
+                                </button>
+                            </th>
+                            <th>
+                                <button type="button" class="btn btn-link btn-sm text-body text-decoration-none p-0">
+                                    Role <i class="bi bi-arrow-down-up small" aria-hidden="true"></i>
+                                </button>
+                            </th>
+                            <th>
+                                <button type="button" class="btn btn-link btn-sm text-body text-decoration-none p-0">
+                                    Status <i class="bi bi-arrow-down-up small" aria-hidden="true"></i>
+                                </button>
+                            </th>
+                            <th>
+                                <button type="button" class="btn btn-link btn-sm text-body text-decoration-none p-0">
+                                    Joined <i class="bi bi-arrow-down-up small" aria-hidden="true"></i>
+                                </button>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for user in users %}
+                            <tr>
+                                <td>{{ user.id }}</td>
+                                <td>{{ user.name }}</td>
+                                <td><a href="mailto:{{ user.email }}">{{ user.email }}</a></td>
+                                <td>{{ user.role }}</td>
+                                <td>
+                                    <span class="badge text-bg-{{ status_variants[user.status] ?? 'secondary' }}">{{ user.status }}</span>
+                                </td>
+                                <td>{{ user.joined }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="card-footer d-flex flex-wrap align-items-center justify-content-between gap-2">
+            <span class="text-secondary small">Showing 1 to {{ users|length }} of {{ users|length }} entries</span>
+            <nav aria-label="Table pagination">
+                <ul class="pagination pagination-sm m-0">
+                    <li class="page-item disabled"><a class="page-link" href="#" aria-label="Previous">&laquo;</a></li>
+                    <li class="page-item active" aria-current="page"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    <li class="page-item"><a class="page-link" href="#" aria-label="Next">&raquo;</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+{% endblock %}

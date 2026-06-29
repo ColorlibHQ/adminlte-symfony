@@ -1,0 +1,177 @@
+{#
+    Simple tables — mirrors AdminLTE 4 dist/tables/simple.html. Each table sits in
+    a bundle Card; the table markup itself is raw Bootstrap 5.3.
+
+    Wire it from a controller:
+
+        #[Route('/admin/tables/simple', name: 'adminlte_demo_tables_simple')]
+        public function simpleTables(): Response
+        {
+            return $this->render('@AdminLte/demo/tables-simple.html.twig');
+        }
+#}
+{% extends '@AdminLte/layout.html.twig' %}
+
+{% block title %}Simple Tables · {{ adminlte.title }}{% endblock %}
+{% block page_title %}Simple Tables{% endblock %}
+
+{% block breadcrumb %}
+    <ol class="breadcrumb float-sm-end">
+        <li class="breadcrumb-item"><a href="/">Home</a></li>
+        <li class="breadcrumb-item">Tables</li>
+        <li class="breadcrumb-item active" aria-current="page">Simple</li>
+    </ol>
+{% endblock %}
+
+{# Reusable task rows shared by every table on this page. #}
+{% macro task_rows() %}
+    <tr class="align-middle">
+        <td>1.</td>
+        <td>Update software</td>
+        <td>
+            <div class="progress progress-xs">
+                <div class="progress-bar text-bg-danger" style="width: 55%"></div>
+            </div>
+        </td>
+        <td><span class="badge text-bg-danger">55%</span></td>
+    </tr>
+    <tr class="align-middle">
+        <td>2.</td>
+        <td>Clean database</td>
+        <td>
+            <div class="progress progress-xs">
+                <div class="progress-bar text-bg-warning" style="width: 70%"></div>
+            </div>
+        </td>
+        <td><span class="badge text-bg-warning">70%</span></td>
+    </tr>
+    <tr class="align-middle">
+        <td>3.</td>
+        <td>Cron job running</td>
+        <td>
+            <div class="progress progress-xs progress-striped active">
+                <div class="progress-bar text-bg-primary" style="width: 30%"></div>
+            </div>
+        </td>
+        <td><span class="badge text-bg-primary">30%</span></td>
+    </tr>
+    <tr class="align-middle">
+        <td>4.</td>
+        <td>Fix and squish bugs</td>
+        <td>
+            <div class="progress progress-xs progress-striped active">
+                <div class="progress-bar text-bg-success" style="width: 90%"></div>
+            </div>
+        </td>
+        <td><span class="badge text-bg-success">90%</span></td>
+    </tr>
+{% endmacro %}
+
+{% import _self as tables %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-md-6">
+            <twig:Adminlte:Card title="Bordered Table"
+                footer='<ul class="pagination pagination-sm m-0 float-end"><li class="page-item"><a class="page-link" href="#">&laquo;</a></li><li class="page-item"><a class="page-link" href="#">1</a></li><li class="page-item"><a class="page-link" href="#">2</a></li><li class="page-item"><a class="page-link" href="#">3</a></li><li class="page-item"><a class="page-link" href="#">&raquo;</a></li></ul>'>
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th style="width: 10px">#</th>
+                            <th>Task</th>
+                            <th>Progress</th>
+                            <th style="width: 40px">Label</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{ tables.task_rows() }}
+                    </tbody>
+                </table>
+            </twig:Adminlte:Card>
+
+            <twig:Adminlte:Card title="Hover Rows Table">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th style="width: 10px">#</th>
+                            <th>Task</th>
+                            <th>Progress</th>
+                            <th style="width: 40px">Label</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{ tables.task_rows() }}
+                    </tbody>
+                </table>
+            </twig:Adminlte:Card>
+
+            <twig:Adminlte:Card title="Condensed Full Width Table" bodyClass="p-0">
+                <table class="table table-sm">
+                    <thead>
+                        <tr>
+                            <th style="width: 10px">#</th>
+                            <th>Task</th>
+                            <th>Progress</th>
+                            <th style="width: 40px">Label</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{ tables.task_rows() }}
+                    </tbody>
+                </table>
+            </twig:Adminlte:Card>
+        </div>
+
+        <div class="col-md-6">
+            <twig:Adminlte:Card title="Simple Full Width Table" bodyClass="p-0">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th style="width: 10px">#</th>
+                            <th>Task</th>
+                            <th>Progress</th>
+                            <th style="width: 40px">Label</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{ tables.task_rows() }}
+                    </tbody>
+                </table>
+            </twig:Adminlte:Card>
+
+            <twig:Adminlte:Card title="Striped Full Width Table" bodyClass="p-0">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th style="width: 10px">#</th>
+                            <th>Task</th>
+                            <th>Progress</th>
+                            <th style="width: 40px">Label</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{ tables.task_rows() }}
+                    </tbody>
+                </table>
+            </twig:Adminlte:Card>
+
+            <twig:Adminlte:Card title="Striped &amp; Bordered Responsive Table" bodyClass="p-0">
+                <div class="table-responsive">
+                    <table class="table table-striped table-bordered">
+                        <thead>
+                            <tr>
+                                <th style="width: 10px">#</th>
+                                <th>Task</th>
+                                <th>Progress</th>
+                                <th style="width: 40px">Label</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {{ tables.task_rows() }}
+                        </tbody>
+                    </table>
+                </div>
+            </twig:Adminlte:Card>
+        </div>
+    </div>
+{% endblock %}

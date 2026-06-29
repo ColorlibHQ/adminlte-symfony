@@ -1,0 +1,71 @@
+{#
+    Small Box widgets — mirrors AdminLTE 4 dist/widgets/small-box.html.
+
+    Wire it from a controller:
+
+        #[Route('/admin/widgets/small-box', name: 'adminlte_demo_widgets_small_box')]
+        public function smallBox(): Response
+        {
+            return $this->render('@AdminLte/demo/widgets-small-box.html.twig');
+        }
+#}
+{% extends '@AdminLte/layout.html.twig' %}
+
+{% block title %}Small Box · {{ adminlte.title }}{% endblock %}
+{% block page_title %}Small Box{% endblock %}
+
+{% block breadcrumb %}
+    <ol class="breadcrumb float-sm-end">
+        <li class="breadcrumb-item"><a href="/">Home</a></li>
+        <li class="breadcrumb-item">Widgets</li>
+        <li class="breadcrumb-item active" aria-current="page">Small Box</li>
+    </ol>
+{% endblock %}
+
+{% block body %}
+    <h5 class="mb-2">Small Box</h5>
+    <div class="row">
+        <div class="col-lg-3 col-6">
+            <twig:Adminlte:SmallBox title="150" text="New Orders" variant="primary" icon="bi bi-bag-fill" url="#" />
+        </div>
+        <div class="col-lg-3 col-6">
+            <twig:Adminlte:SmallBox title="53%" text="Bounce Rate" variant="success" icon="bi bi-bar-chart-fill" url="#" />
+        </div>
+        <div class="col-lg-3 col-6">
+            <twig:Adminlte:SmallBox title="44" text="User Registrations" variant="warning" icon="bi bi-person-add" url="#" />
+        </div>
+        <div class="col-lg-3 col-6">
+            <twig:Adminlte:SmallBox title="65" text="Unique Visitors" variant="danger" icon="bi bi-pie-chart-fill" url="#" />
+        </div>
+    </div>
+
+    <h5 class="mt-4 mb-2">All Theme Colors</h5>
+    <div class="row">
+        <div class="col-lg-3 col-6">
+            <twig:Adminlte:SmallBox title="150" text="New Orders" variant="primary" icon="bi bi-bag-fill" url="#" />
+        </div>
+        <div class="col-lg-3 col-6">
+            <twig:Adminlte:SmallBox title="53%" text="Bounce Rate" variant="secondary" icon="bi bi-bar-chart-fill" url="#" />
+        </div>
+        <div class="col-lg-3 col-6">
+            <twig:Adminlte:SmallBox title="44" text="User Registrations" variant="success" icon="bi bi-person-add" url="#" />
+        </div>
+        <div class="col-lg-3 col-6">
+            <twig:Adminlte:SmallBox title="65" text="Unique Visitors" variant="info" icon="bi bi-pie-chart-fill" url="#" />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-3 col-6">
+            <twig:Adminlte:SmallBox title="760" text="Sales" variant="warning" icon="bi bi-cart-fill" url="#" />
+        </div>
+        <div class="col-lg-3 col-6">
+            <twig:Adminlte:SmallBox title="2,000" text="New Members" variant="danger" icon="bi bi-people-fill" url="#" />
+        </div>
+        <div class="col-lg-3 col-6">
+            <twig:Adminlte:SmallBox title="41,410" text="Likes" variant="light" icon="bi bi-hand-thumbs-up-fill" url="#" />
+        </div>
+        <div class="col-lg-3 col-6">
+            <twig:Adminlte:SmallBox title="92" text="Tasks" variant="dark" icon="bi bi-list-check" url="#" />
+        </div>
+    </div>
+{% endblock %}

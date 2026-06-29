@@ -1,0 +1,154 @@
+{#
+    Card widgets — mirrors AdminLTE 4 dist/widgets/cards.html.
+
+    Wire it from a controller:
+
+        #[Route('/admin/widgets/cards', name: 'adminlte_demo_widgets_cards')]
+        public function cards(): Response
+        {
+            return $this->render('@AdminLte/demo/widgets-cards.html.twig');
+        }
+#}
+{% extends '@AdminLte/layout.html.twig' %}
+
+{% block title %}Cards · {{ adminlte.title }}{% endblock %}
+{% block page_title %}Cards{% endblock %}
+
+{% block breadcrumb %}
+    <ol class="breadcrumb float-sm-end">
+        <li class="breadcrumb-item"><a href="/">Home</a></li>
+        <li class="breadcrumb-item">Widgets</li>
+        <li class="breadcrumb-item active" aria-current="page">Cards</li>
+    </ol>
+{% endblock %}
+
+{% block body %}
+    <h5 class="mb-2">Abilities</h5>
+    <div class="row g-4 mb-4">
+        <div class="col-md-3">
+            <twig:Adminlte:Card title="Expandable" variant="primary" collapsible collapsed>
+                The body of the card
+            </twig:Adminlte:Card>
+        </div>
+        <div class="col-md-3">
+            <twig:Adminlte:Card title="Collapsable" variant="success" collapsible>
+                The body of the card
+            </twig:Adminlte:Card>
+        </div>
+        <div class="col-md-3">
+            <twig:Adminlte:Card title="Removable" variant="warning" removable>
+                The body of the card
+            </twig:Adminlte:Card>
+        </div>
+        {# The component has no maximizable tool, so this card is built from raw markup. #}
+        <div class="col-md-3">
+            <div class="card card-danger">
+                <div class="card-header">
+                    <h3 class="card-title">Maximizable</h3>
+                    <div class="card-tools">
+                        <button type="button" class="btn btn-tool" data-lte-toggle="card-maximize" aria-label="Maximize card">
+                            <i data-lte-icon="maximize" class="bi bi-fullscreen"></i>
+                            <i data-lte-icon="minimize" class="bi bi-fullscreen-exit"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="card-body">The body of the card</div>
+            </div>
+        </div>
+    </div>
+
+    <h5 class="mb-2">Card Outlined</h5>
+    <div class="row g-4 mb-4">
+        <div class="col-md-3">
+            <twig:Adminlte:Card title="Expandable" variant="primary" outline collapsible collapsed>
+                The body of the card
+            </twig:Adminlte:Card>
+        </div>
+        <div class="col-md-3">
+            <twig:Adminlte:Card title="Collapsable" variant="success" outline collapsible>
+                The body of the card
+            </twig:Adminlte:Card>
+        </div>
+        <div class="col-md-3">
+            <twig:Adminlte:Card title="Removable" variant="warning" outline removable>
+                The body of the card
+            </twig:Adminlte:Card>
+        </div>
+        {# Outlined + maximizable: raw markup (no maximizable component tool). #}
+        <div class="col-md-3">
+            <div class="card card-outline card-danger">
+                <div class="card-header">
+                    <h3 class="card-title">Maximizable</h3>
+                    <div class="card-tools">
+                        <button type="button" class="btn btn-tool" data-lte-toggle="card-maximize" aria-label="Maximize card">
+                            <i data-lte-icon="maximize" class="bi bi-fullscreen"></i>
+                            <i data-lte-icon="minimize" class="bi bi-fullscreen-exit"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="card-body">The body of the card</div>
+            </div>
+        </div>
+    </div>
+
+    {# Solid cards use `.text-bg-*` rather than `.card-*`, which the Card component
+       does not emit, so these are reproduced verbatim from the core markup. #}
+    <h5 class="mb-2">Card with <code>.text-bg-*</code></h5>
+    <div class="row g-4 mb-4">
+        <div class="col-md-3">
+            <div class="card text-bg-primary collapsed-card">
+                <div class="card-header">
+                    <h3 class="card-title">Expandable</h3>
+                    <div class="card-tools">
+                        <button type="button" class="btn btn-tool" data-lte-toggle="card-collapse" aria-label="Collapse card">
+                            <i data-lte-icon="expand" class="bi bi-plus-lg"></i>
+                            <i data-lte-icon="collapse" class="bi bi-dash-lg"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="card-body">The body of the card</div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card text-bg-success">
+                <div class="card-header">
+                    <h3 class="card-title">Collapsable</h3>
+                    <div class="card-tools">
+                        <button type="button" class="btn btn-tool" data-lte-toggle="card-collapse" aria-label="Collapse card">
+                            <i data-lte-icon="expand" class="bi bi-plus-lg"></i>
+                            <i data-lte-icon="collapse" class="bi bi-dash-lg"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="card-body">The body of the card</div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card text-bg-warning">
+                <div class="card-header">
+                    <h3 class="card-title">Removable</h3>
+                    <div class="card-tools">
+                        <button type="button" class="btn btn-tool" data-lte-toggle="card-remove" aria-label="Remove card">
+                            <i class="bi bi-x-lg"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="card-body">The body of the card</div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card text-bg-danger">
+                <div class="card-header">
+                    <h3 class="card-title">Maximizable</h3>
+                    <div class="card-tools">
+                        <button type="button" class="btn btn-tool" data-lte-toggle="card-maximize" aria-label="Maximize card">
+                            <i data-lte-icon="maximize" class="bi bi-fullscreen"></i>
+                            <i data-lte-icon="minimize" class="bi bi-fullscreen-exit"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="card-body">The body of the card</div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
