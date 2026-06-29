@@ -1,0 +1,190 @@
+{#
+    User Profile demo — mirrors AdminLTE's pages/profile.html.
+
+    Uses the ProfileCard component for the sidebar and Bootstrap tabs for the
+    activity / timeline / settings panels.
+
+    Wire it from a controller:
+
+        #[Route('/admin/profile', name: 'adminlte_demo_profile')]
+        public function profile(): Response
+        {
+            return $this->render('@AdminLte/demo/profile.html.twig');
+        }
+#}
+{% extends '@AdminLte/layout.html.twig' %}
+
+{% block title %}User Profile · {{ adminlte.title }}{% endblock %}
+{% block page_title %}User Profile{% endblock %}
+
+{% block breadcrumb %}
+    <ol class="breadcrumb float-sm-end">
+        <li class="breadcrumb-item"><a href="/">Home</a></li>
+        <li class="breadcrumb-item"><a href="#">User</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Profile</li>
+    </ol>
+{% endblock %}
+
+{% block body %}
+    <div class="row g-3">
+        {# Profile sidebar #}
+        <div class="col-md-3">
+            <twig:Adminlte:ProfileCard name="Jane Doe" title="Product Designer" image="https://www.gravatar.com/avatar/?d=mp&s=50" variant="primary">
+                <ul class="list-group list-group-unbordered mb-3">
+                    <li class="list-group-item d-flex justify-content-between px-0">
+                        <span class="text-secondary">Followers</span>
+                        <span class="fw-semibold">1,322</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between px-0">
+                        <span class="text-secondary">Following</span>
+                        <span class="fw-semibold">543</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between px-0">
+                        <span class="text-secondary">Friends</span>
+                        <span class="fw-semibold">13,287</span>
+                    </li>
+                </ul>
+                <a href="#" class="btn btn-primary w-100">
+                    <i class="bi bi-person-plus me-1" aria-hidden="true"></i>
+                    Follow
+                </a>
+            </twig:Adminlte:ProfileCard>
+
+            {# About details #}
+            <div class="mt-3">
+                <twig:Adminlte:Card title="About">
+                    <div class="small">
+                        <p class="fw-semibold mb-1"><i class="bi bi-mortarboard me-1 text-secondary" aria-hidden="true"></i>Education</p>
+                        <p class="text-secondary mb-3">BS in Computer Science from the University of Tennessee at Knoxville</p>
+                        <p class="fw-semibold mb-1"><i class="bi bi-geo-alt me-1 text-secondary" aria-hidden="true"></i>Location</p>
+                        <p class="text-secondary mb-3">Malibu, California</p>
+                        <p class="fw-semibold mb-1"><i class="bi bi-tags me-1 text-secondary" aria-hidden="true"></i>Skills</p>
+                        <p class="mb-3">
+                            <span class="badge text-bg-secondary me-1">UI/UX</span>
+                            <span class="badge text-bg-secondary me-1">Figma</span>
+                            <span class="badge text-bg-secondary me-1">Design Systems</span>
+                            <span class="badge text-bg-secondary">Research</span>
+                        </p>
+                        <p class="fw-semibold mb-1"><i class="bi bi-pencil-square me-1 text-secondary" aria-hidden="true"></i>Notes</p>
+                        <p class="text-secondary mb-0">Lorem ipsum represents a long-held tradition for designers, typographers and the like.</p>
+                    </div>
+                </twig:Adminlte:Card>
+            </div>
+        </div>
+
+        {# Tabbed content #}
+        <div class="col-md-9">
+            <div class="card">
+                <div class="card-header p-0 border-bottom-0">
+                    <ul class="nav nav-tabs" id="profile-tabs" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active" id="activity-tab" data-bs-toggle="tab" data-bs-target="#activity" type="button" role="tab" aria-selected="true">Activity</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="timeline-tab" data-bs-toggle="tab" data-bs-target="#timeline" type="button" role="tab" aria-selected="false">Timeline</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="settings-tab" data-bs-toggle="tab" data-bs-target="#settings" type="button" role="tab" aria-selected="false">Settings</button>
+                        </li>
+                    </ul>
+                </div>
+                <div class="card-body">
+                    <div class="tab-content">
+                        {# Activity tab #}
+                        <div class="tab-pane fade show active" id="activity" role="tabpanel" aria-labelledby="activity-tab">
+                            <article class="d-flex gap-3 mb-4">
+                                <img src="https://www.gravatar.com/avatar/?d=mp&s=50" class="flex-shrink-0 rounded-circle" alt="Jane Doe" style="width: 40px; height: 40px">
+                                <div class="flex-grow-1">
+                                    <div class="d-flex justify-content-between">
+                                        <h4 class="h6 mb-0">Jane Doe</h4>
+                                        <small class="text-secondary">2 hours ago</small>
+                                    </div>
+                                    <p class="mb-2">Shipped <a href="#">design-system v2.4</a> with a refreshed color palette and new motion primitives.</p>
+                                    <a href="#" class="btn btn-sm btn-outline-secondary"><i class="bi bi-hand-thumbs-up me-1" aria-hidden="true"></i>Like</a>
+                                    <a href="#" class="btn btn-sm btn-outline-secondary ms-1"><i class="bi bi-chat me-1" aria-hidden="true"></i>Comment</a>
+                                </div>
+                            </article>
+                            <article class="d-flex gap-3 mb-4">
+                                <img src="https://www.gravatar.com/avatar/?d=mp&s=50" class="flex-shrink-0 rounded-circle" alt="Jane Doe" style="width: 40px; height: 40px">
+                                <div class="flex-grow-1">
+                                    <div class="d-flex justify-content-between">
+                                        <h4 class="h6 mb-0">Jane Doe</h4>
+                                        <small class="text-secondary">Yesterday</small>
+                                    </div>
+                                    <p class="mb-2">Posted a question in <a href="#">#design-help</a>: how should we handle focus rings on dark-themed CTA buttons?</p>
+                                </div>
+                            </article>
+                            <article class="d-flex gap-3">
+                                <img src="https://www.gravatar.com/avatar/?d=mp&s=50" class="flex-shrink-0 rounded-circle" alt="Jane Doe" style="width: 40px; height: 40px">
+                                <div class="flex-grow-1">
+                                    <div class="d-flex justify-content-between">
+                                        <h4 class="h6 mb-0">Jane Doe</h4>
+                                        <small class="text-secondary">3 days ago</small>
+                                    </div>
+                                    <p class="mb-0">Updated her bio and added <em>Research</em> to her skills.</p>
+                                </div>
+                            </article>
+                        </div>
+
+                        {# Timeline tab #}
+                        <div class="tab-pane fade" id="timeline" role="tabpanel" aria-labelledby="timeline-tab">
+                            <ul class="list-unstyled mb-0">
+                                <li class="d-flex gap-3 mb-3">
+                                    <span class="badge text-bg-success rounded-pill flex-shrink-0 align-self-start mt-1"><i class="bi bi-check-lg" aria-hidden="true"></i></span>
+                                    <div>
+                                        <p class="mb-0 fw-semibold">Released v2.4 of the design system</p>
+                                        <small class="text-secondary">May 16, 2026</small>
+                                    </div>
+                                </li>
+                                <li class="d-flex gap-3 mb-3">
+                                    <span class="badge text-bg-info rounded-pill flex-shrink-0 align-self-start mt-1"><i class="bi bi-mic" aria-hidden="true"></i></span>
+                                    <div>
+                                        <p class="mb-0 fw-semibold">Spoke at the local UX meetup</p>
+                                        <small class="text-secondary">April 22, 2026</small>
+                                    </div>
+                                </li>
+                                <li class="d-flex gap-3">
+                                    <span class="badge text-bg-warning rounded-pill flex-shrink-0 align-self-start mt-1"><i class="bi bi-briefcase" aria-hidden="true"></i></span>
+                                    <div>
+                                        <p class="mb-0 fw-semibold">Joined the product team as Senior Designer</p>
+                                        <small class="text-secondary">March 1, 2026</small>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+
+                        {# Settings tab #}
+                        <div class="tab-pane fade" id="settings" role="tabpanel" aria-labelledby="settings-tab">
+                            <form class="row g-3">
+                                <div class="col-md-6">
+                                    <label class="form-label" for="profile-first">First name</label>
+                                    <input type="text" class="form-control" id="profile-first" value="Jane">
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label" for="profile-last">Last name</label>
+                                    <input type="text" class="form-control" id="profile-last" value="Doe">
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label" for="profile-email">Email</label>
+                                    <input type="email" class="form-control" id="profile-email" value="jane@example.com">
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label" for="profile-role">Role</label>
+                                    <input type="text" class="form-control" id="profile-role" value="Product Designer">
+                                </div>
+                                <div class="col-12">
+                                    <label class="form-label" for="profile-bio">Bio</label>
+                                    <textarea class="form-control" id="profile-bio" rows="4">Designer with a soft spot for design tokens and accessibility.</textarea>
+                                </div>
+                                <div class="col-12">
+                                    <button type="submit" class="btn btn-primary">Save changes</button>
+                                    <button type="reset" class="btn btn-outline-secondary ms-1">Cancel</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
