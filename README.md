@@ -36,7 +36,7 @@
 <!-- ADMINLTE-ECOSYSTEM:END -->
 
 <p align="center">
-  <a href="https://adminlte-symfony.pages.dev"><img src=".github/preview.png" alt="AdminLTE 4 for Symfony — dashboard preview" width="100%"></a>
+  <a href="https://adminlte-symfony.pages.dev"><img src=".github/preview.webp" alt="AdminLTE 4 for Symfony — dashboard preview" width="100%"></a>
 </p>
 
 
