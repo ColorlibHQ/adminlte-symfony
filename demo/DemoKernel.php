@@ -72,12 +72,12 @@ final class DemoKernel extends Kernel
         $container->extension('admin_lte', [
             'title' => 'AdminLTE 4 · Symfony',
             'logo' => [
-                'image' => 'https://cdn.jsdelivr.net/npm/admin-lte@4.0.2/dist/assets/img/AdminLTELogo.png',
+                'image' => 'https://cdn.jsdelivr.net/npm/admin-lte@4.8.1/dist/assets/img/AdminLTELogo.png',
                 'text' => 'AdminLTE 4',
                 'alt' => 'AdminLTE Logo',
             ],
             'dashboard_route' => 'demo_home',
-            'footer' => ['version' => 'v4.0.2'],
+            'footer' => ['version' => 'v4.8.1'],
             'menu' => self::menu(),
         ]);
     }

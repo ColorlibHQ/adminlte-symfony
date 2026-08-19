@@ -196,8 +196,8 @@ templates/bundles/EasyAdminBundle/layout.html.twig   ←  copy from this bundle
 public function configureAssets(): Assets
 {
     return Assets::new()
-        ->addCssFile('https://cdn.jsdelivr.net/npm/admin-lte@4.0.2/dist/css/adminlte.min.css')
-        ->addJsFile('https://cdn.jsdelivr.net/npm/admin-lte@4.0.2/dist/js/adminlte.min.js');
+        ->addCssFile('https://cdn.jsdelivr.net/npm/admin-lte@4.8.1/dist/css/adminlte.min.css')
+        ->addJsFile('https://cdn.jsdelivr.net/npm/admin-lte@4.8.1/dist/js/adminlte.min.js');
 }
 ```
 
