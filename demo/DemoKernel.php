@@ -69,6 +69,14 @@ final class DemoKernel extends Kernel
             'default_path' => '%kernel.project_dir%/templates',
         ]);
 
+        // Symfony UX 3 made both keys mandatory. Without them the component
+        // tags are not registered and `<twig:Adminlte:Sidebar />` is emitted
+        // into the export verbatim instead of being rendered.
+        $container->extension('twig_component', [
+            'defaults' => [],
+            'anonymous_template_directory' => 'components',
+        ]);
+
         $container->extension('admin_lte', [
             'title' => 'AdminLTE 4 · Symfony',
             'logo' => [

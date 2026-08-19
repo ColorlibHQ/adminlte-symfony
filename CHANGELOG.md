@@ -6,6 +6,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+- **The Simple Tables demo page rendered six tables with empty bodies.** The
+  shared task rows came from a Twig macro called from inside
+  `<twig:Adminlte:Card>` slots — and a Twig Component renders slot content in
+  its own context, where an imported macro is not visible, so every `<tbody>`
+  came out empty with no error. The rows now live in
+  `templates/demo/_task_rows.html.twig` and are `{% include %}`d.
+- **The static export emitted unrendered `<twig:Adminlte:*/>` tags on 28 of its
+  36 pages.** Symfony UX 3 makes `twig_component.defaults` and
+  `twig_component.anonymous_template_directory` mandatory; `TestKernel` gained
+  them with the UX 3 bump but `demo/DemoKernel.php` did not, so the component
+  tags were never registered and passed through as literal text.
+
 ## [0.2.1] - 2026-08-19
 
 ### Changed

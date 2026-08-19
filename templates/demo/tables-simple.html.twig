@@ -24,50 +24,6 @@
 {% endblock %}
 
 {# Reusable task rows shared by every table on this page. #}
-{% macro task_rows() %}
-    <tr class="align-middle">
-        <td>1.</td>
-        <td>Update software</td>
-        <td>
-            <div class="progress progress-xs">
-                <div class="progress-bar text-bg-danger" style="width: 55%"></div>
-            </div>
-        </td>
-        <td><span class="badge text-bg-danger">55%</span></td>
-    </tr>
-    <tr class="align-middle">
-        <td>2.</td>
-        <td>Clean database</td>
-        <td>
-            <div class="progress progress-xs">
-                <div class="progress-bar text-bg-warning" style="width: 70%"></div>
-            </div>
-        </td>
-        <td><span class="badge text-bg-warning">70%</span></td>
-    </tr>
-    <tr class="align-middle">
-        <td>3.</td>
-        <td>Cron job running</td>
-        <td>
-            <div class="progress progress-xs progress-striped active">
-                <div class="progress-bar text-bg-primary" style="width: 30%"></div>
-            </div>
-        </td>
-        <td><span class="badge text-bg-primary">30%</span></td>
-    </tr>
-    <tr class="align-middle">
-        <td>4.</td>
-        <td>Fix and squish bugs</td>
-        <td>
-            <div class="progress progress-xs progress-striped active">
-                <div class="progress-bar text-bg-success" style="width: 90%"></div>
-            </div>
-        </td>
-        <td><span class="badge text-bg-success">90%</span></td>
-    </tr>
-{% endmacro %}
-
-{% import _self as tables %}
 
 {% block body %}
     <div class="row">
@@ -84,7 +40,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        {{ tables.task_rows() }}
+                        {% include '@AdminLte/demo/_task_rows.html.twig' %}
                     </tbody>
                 </table>
             </twig:Adminlte:Card>
@@ -100,7 +56,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        {{ tables.task_rows() }}
+                        {% include '@AdminLte/demo/_task_rows.html.twig' %}
                     </tbody>
                 </table>
             </twig:Adminlte:Card>
@@ -116,7 +72,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        {{ tables.task_rows() }}
+                        {% include '@AdminLte/demo/_task_rows.html.twig' %}
                     </tbody>
                 </table>
             </twig:Adminlte:Card>
@@ -134,7 +90,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        {{ tables.task_rows() }}
+                        {% include '@AdminLte/demo/_task_rows.html.twig' %}
                     </tbody>
                 </table>
             </twig:Adminlte:Card>
@@ -150,7 +106,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        {{ tables.task_rows() }}
+                        {% include '@AdminLte/demo/_task_rows.html.twig' %}
                     </tbody>
                 </table>
             </twig:Adminlte:Card>
@@ -167,7 +123,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            {{ tables.task_rows() }}
+                            {% include '@AdminLte/demo/_task_rows.html.twig' %}
                         </tbody>
                     </table>
                 </div>

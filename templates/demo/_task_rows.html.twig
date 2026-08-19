@@ -1,0 +1,48 @@
+{#
+    The six task rows shared by every table on the Simple Tables page.
+
+    This is an include rather than a macro on purpose: the tables live inside
+    `<twig:Adminlte:Card>` slots, and a Twig Component renders slot content in
+    its own context — an imported macro is not visible there, so the rows
+    silently rendered as empty <tbody> elements.
+#}
+    <tr class="align-middle">
+        <td>1.</td>
+        <td>Update software</td>
+        <td>
+            <div class="progress progress-xs">
+                <div class="progress-bar text-bg-danger" style="width: 55%"></div>
+            </div>
+        </td>
+        <td><span class="badge text-bg-danger">55%</span></td>
+    </tr>
+    <tr class="align-middle">
+        <td>2.</td>
+        <td>Clean database</td>
+        <td>
+            <div class="progress progress-xs">
+                <div class="progress-bar text-bg-warning" style="width: 70%"></div>
+            </div>
+        </td>
+        <td><span class="badge text-bg-warning">70%</span></td>
+    </tr>
+    <tr class="align-middle">
+        <td>3.</td>
+        <td>Cron job running</td>
+        <td>
+            <div class="progress progress-xs progress-striped active">
+                <div class="progress-bar text-bg-primary" style="width: 30%"></div>
+            </div>
+        </td>
+        <td><span class="badge text-bg-primary">30%</span></td>
+    </tr>
+    <tr class="align-middle">
+        <td>4.</td>
+        <td>Fix and squish bugs</td>
+        <td>
+            <div class="progress progress-xs progress-striped active">
+                <div class="progress-bar text-bg-success" style="width: 90%"></div>
+            </div>
+        </td>
+        <td><span class="badge text-bg-success">90%</span></td>
+    </tr>
