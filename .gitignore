@@ -14,3 +14,4 @@
 /demo/vendor/
 /demo/.env.local
 /demo/public/assets/
+/.wrangler/
