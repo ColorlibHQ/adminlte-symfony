@@ -66,6 +66,12 @@ final class TestKernel extends Kernel
             'default_path' => '%kernel.project_dir%/templates',
         ]);
 
+        // Symfony UX Twig Component 3.0 made both keys mandatory; harmless on 2.x.
+        $container->extension('twig_component', [
+            'defaults' => [],
+            'anonymous_template_directory' => 'components',
+        ]);
+
         $container->extension('admin_lte', [
             'title' => 'Test Admin',
             'dashboard_route' => 'test_dashboard',
