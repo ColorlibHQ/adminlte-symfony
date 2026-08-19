@@ -10,9 +10,11 @@
     config-driven menu — see the "EasyAdmin theme" section of the README; that
     structural integration is being rolled out incrementally.
 
-    `head_stylesheets` and `body_javascripts` are stable EasyAdmin 5 blocks.
+    `head_stylesheets` and `body_javascript` are stable EasyAdmin 5 blocks. The
+    parent is referenced as `@!EasyAdmin` — the `!` targets the bundle's own
+    template, since `@EasyAdmin` resolves back to this override file.
 #}
-{% extends '@EasyAdmin/layout.html.twig' %}
+{% extends '@!EasyAdmin/layout.html.twig' %}
 
 {% block head_stylesheets %}
     {{ parent() }}
@@ -21,7 +23,7 @@
     {{ include('@AdminLte/components/layout/_color_mode_script.html.twig') }}
 {% endblock %}
 
-{% block body_javascripts %}
+{% block body_javascript %}
     {{ parent() }}
     <script src="https://cdn.jsdelivr.net/npm/admin-lte@4.8.1/dist/js/adminlte.min.js"></script>
 {% endblock %}

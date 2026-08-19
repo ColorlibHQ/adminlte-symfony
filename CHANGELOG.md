@@ -6,6 +6,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+- **EasyAdmin theme: the layout override no longer recurses into itself.** It extended
+  `@EasyAdmin/layout.html.twig`, but once the file is copied to
+  `templates/bundles/EasyAdminBundle/layout.html.twig` that namespace resolves back to the
+  override — so every EasyAdmin page rendered the template in an infinite loop until PHP hit
+  the memory limit. It now extends `@!EasyAdmin/layout.html.twig`; the `!` is Symfony's marker
+  for "the bundle's own template". The theme has never rendered before this fix.
+- **EasyAdmin theme: `adminlte.min.js` is now actually emitted.** The override declared a
+  `body_javascripts` block, but EasyAdmin's block is `body_javascript` (singular) — in 5.1 as
+  well as 5.5. Twig silently drops a child block the parent never renders, so the script tag
+  was never written and every AdminLTE JS behaviour was dead in the EasyAdmin theme.
+
+[Unreleased]: https://github.com/ColorlibHQ/adminlte-symfony/commits/main
+
+
 ### Added
 - Initial Symfony 8.1 bundle targeting AdminLTE 4 + Bootstrap 5.3.
 - AssetMapper-first asset pipeline (no Webpack Encore required).
