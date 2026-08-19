@@ -6,21 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-### Added
-- Initial Symfony 8.1 bundle targeting AdminLTE 4 + Bootstrap 5.3.
-- AssetMapper-first asset pipeline (no Webpack Encore required).
-- Twig Components for the layout shell (`DashboardLayout`, `Sidebar`, `SidebarNav`,
-  `SidebarNavItem`, `Topbar`, `Footer`, `ColorModeToggle`).
-- Widget Twig Components: `Card`, `SmallBox`, `InfoBox`, `Alert`, `Callout`, `Progress`,
-  `ProgressGroup`, `Timeline` + `TimelineItem`, `ProfileCard`, `DescriptionBlock`,
-  `Breadcrumb`, `Ratings`, `Toast`, `Modal`, `Accordion` + `AccordionItem`, `Tabs`,
-  `NavNotifications`, `NavMessages`, `NavTasks`, and a ⌘K `CommandPalette` indexed from
-  the sidebar menu — parity with the Vue/React component inventory.
-- Form Twig Components: `Button`, `Input`, `Select`, `Textarea`, `InputSwitch`,
-  `InputColor`, `InputFile`.
-- Config-driven sidebar menu with active-route detection and a `permission` security filter.
-- SSR-safe color/dark-mode toggle (no flash of incorrect theme) persisted to `localStorage`.
-- Optional **AdminLTE theme for EasyAdmin** (`templates/bundles/EasyAdminBundle`).
+## [0.2.1] - 2026-08-19
 
 ### Changed
 - Pinned the CDN links in every layout, demo template and the EasyAdmin theme to
@@ -69,4 +55,24 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   well as 5.5. Twig silently drops a child block the parent never renders, so the script tag
   was never written and every AdminLTE JS behaviour was dead in the EasyAdmin theme.
 
-[Unreleased]: https://github.com/ColorlibHQ/adminlte-symfony/commits/main
+## [0.2.0] - 2026-06-26
+
+### Added
+- Initial Symfony 8.1 bundle targeting AdminLTE 4 + Bootstrap 5.3.
+- AssetMapper-first asset pipeline (no Webpack Encore required).
+- Twig Components for the layout shell (`DashboardLayout`, `Sidebar`, `SidebarNav`,
+  `SidebarNavItem`, `Topbar`, `Footer`, `ColorModeToggle`).
+- Widget Twig Components: `Card`, `SmallBox`, `InfoBox`, `Alert`, `Callout`, `Progress`,
+  `ProgressGroup`, `Timeline` + `TimelineItem`, `ProfileCard`, `DescriptionBlock`,
+  `Breadcrumb`, `Ratings`, `Toast`, `Modal`, `Accordion` + `AccordionItem`, `Tabs`,
+  `NavNotifications`, `NavMessages`, `NavTasks`, and a ⌘K `CommandPalette` indexed from
+  the sidebar menu — parity with the Vue/React component inventory.
+- Form Twig Components: `Button`, `Input`, `Select`, `Textarea`, `InputSwitch`,
+  `InputColor`, `InputFile`.
+- Config-driven sidebar menu with active-route detection and a `permission` security filter.
+- SSR-safe color/dark-mode toggle (no flash of incorrect theme) persisted to `localStorage`.
+- Optional **AdminLTE theme for EasyAdmin** (`templates/bundles/EasyAdminBundle`).
+
+[Unreleased]: https://github.com/ColorlibHQ/adminlte-symfony/compare/v0.2.1...HEAD
+[0.2.1]: https://github.com/ColorlibHQ/adminlte-symfony/compare/v0.2.0...v0.2.1
+[0.2.0]: https://github.com/ColorlibHQ/adminlte-symfony/releases/tag/v0.2.0
