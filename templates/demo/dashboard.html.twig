@@ -25,10 +25,8 @@
 {% endblock %}
 
 {% block stylesheets %}{{ parent() }}
-    {# apexcharts #}
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/apexcharts@3.37.1/dist/apexcharts.css" crossorigin="anonymous">
     {# jsvectormap #}
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jsvectormap@1.5.3/dist/css/jsvectormap.min.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jsvectormap@1.7.0/dist/jsvectormap.min.css" crossorigin="anonymous">
 {% endblock %}
 
 {% block body %}
@@ -58,7 +56,9 @@
                 </div>
 
                 <div class="card-body">
-                    <div id="revenue-chart"></div>
+                    <div class="position-relative" style="height: 300px">
+                        <canvas id="revenue-chart" role="img" aria-label="Area chart of digital goods and electronics sales, January to July 2023"></canvas>
+                    </div>
                 </div>
             </div>
             {# /.card #}
@@ -283,15 +283,21 @@
                     {# Row #}
                     <div class="row">
                         <div class="col-4 text-center">
-                            <div id="sparkline-1" class="text-dark"></div>
+                            <div class="position-relative" style="height: 50px">
+                                <canvas id="sparkline-1" role="img" aria-label="Visitors trend"></canvas>
+                            </div>
                             <div class="text-white">Visitors</div>
                         </div>
                         <div class="col-4 text-center">
-                            <div id="sparkline-2" class="text-dark"></div>
+                            <div class="position-relative" style="height: 50px">
+                                <canvas id="sparkline-2" role="img" aria-label="Online trend"></canvas>
+                            </div>
                             <div class="text-white">Online</div>
                         </div>
                         <div class="col-4 text-center">
-                            <div id="sparkline-3" class="text-dark"></div>
+                            <div class="position-relative" style="height: 50px">
+                                <canvas id="sparkline-3" role="img" aria-label="Sales trend"></canvas>
+                            </div>
                             <div class="text-white">Sales</div>
                         </div>
                     </div>
@@ -306,7 +312,7 @@
 
 {% block javascripts %}{{ parent() }}
     {# sortablejs #}
-    <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.7/Sortable.min.js" crossorigin="anonymous"></script>
     <script>
       new Sortable(document.querySelector('.connectedSortable'), {
         group: 'shared',
@@ -319,70 +325,62 @@
       });
     </script>
 
-    {# apexcharts #}
-    <script src="https://cdn.jsdelivr.net/npm/apexcharts@3.37.1/dist/apexcharts.min.js" crossorigin="anonymous"></script>
+    {{ include('@AdminLte/demo/_chartjs.html.twig') }}
     <script>
       // NOTICE!! DO NOT USE ANY OF THIS JAVASCRIPT
       // IT'S ALL JUST JUNK FOR DEMO
       // ++++++++++++++++++++++++++++++++++++++++++
 
-      const sales_chart_options = {
-        series: [
-          {
-            name: 'Digital Goods',
-            data: [28, 48, 40, 19, 86, 27, 90],
-          },
-          {
-            name: 'Electronics',
-            data: [65, 59, 80, 81, 56, 55, 40],
-          },
-        ],
-        chart: {
-          height: 300,
-          type: 'area',
-          toolbar: {
-            show: false,
-          },
-        },
-        legend: {
-          show: false,
-        },
-        colors: ['#0d6efd', '#20c997'],
-        dataLabels: {
-          enabled: false,
-        },
-        stroke: {
-          curve: 'smooth',
-        },
-        xaxis: {
-          type: 'datetime',
-          categories: [
-            '2023-01-01',
-            '2023-02-01',
-            '2023-03-01',
-            '2023-04-01',
-            '2023-05-01',
-            '2023-06-01',
-            '2023-07-01',
-          ],
-        },
-        tooltip: {
-          x: {
-            format: 'MMMM yyyy',
-          },
-        },
-      };
+      const { areaFill } = globalThis.lteChartTheme
 
-      const sales_chart = new ApexCharts(
-        document.querySelector('#revenue-chart'),
-        sales_chart_options,
-      );
-      sales_chart.render();
+      new Chart(document.querySelector('#revenue-chart'), {
+        type: 'line',
+        data: {
+          labels: ["Jan '23", "Feb '23", "Mar '23", "Apr '23", "May '23", "Jun '23", "Jul '23"],
+          datasets: [
+            {
+              label: 'Digital Goods',
+              data: [28, 48, 40, 19, 86, 27, 90],
+              borderColor: '#0d6efd',
+              backgroundColor: areaFill('#0d6efd'),
+              pointBackgroundColor: '#0d6efd',
+              fill: true,
+              tension: 0.4
+            },
+            {
+              label: 'Electronics',
+              data: [65, 59, 80, 81, 56, 55, 40],
+              borderColor: '#20c997',
+              backgroundColor: areaFill('#20c997'),
+              pointBackgroundColor: '#20c997',
+              fill: true,
+              tension: 0.4
+            }
+          ]
+        },
+        options: {
+          plugins: {
+            legend: {
+              display: false
+            },
+            tooltip: {
+              callbacks: {
+                title: ([item]) => `${new Date(2023, item.dataIndex).toLocaleString('en', { month: 'long' })} 2023`
+              }
+            }
+          },
+          scales: {
+            y: {
+              beginAtZero: true
+            }
+          }
+        }
+      })
     </script>
 
     {# jsvectormap #}
-    <script src="https://cdn.jsdelivr.net/npm/jsvectormap@1.5.3/dist/js/jsvectormap.min.js" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/jsvectormap@1.5.3/dist/maps/world.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jsvectormap@1.7.0/dist/jsvectormap.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jsvectormap@1.7.0/dist/maps/world.js" crossorigin="anonymous"></script>
     <script>
       // World map by jsVectorMap
       new jsVectorMap({
@@ -390,89 +388,40 @@
         map: 'world',
       });
 
-      // Sparkline charts
-      const option_sparkline1 = {
-        series: [
-          {
-            data: [1000, 1200, 920, 927, 931, 1027, 819, 930, 1021],
-          },
-        ],
-        chart: {
-          type: 'area',
-          height: 50,
-          sparkline: {
-            enabled: true,
-          },
-        },
-        stroke: {
-          curve: 'straight',
-        },
-        fill: {
-          opacity: 0.3,
-        },
-        yaxis: {
-          min: 0,
-        },
-        colors: ['#DCE6EC'],
-      };
+            // Sparkline charts
+            const sparkline = (selector, data) =>
+              new Chart(document.querySelector(selector), {
+                type: 'line',
+                data: {
+                  labels: data.map((value, index) => index + 1),
+                  datasets: [
+                    {
+                      data,
+                      borderColor: '#DCE6EC',
+                      backgroundColor: 'rgba(220, 230, 236, 0.3)',
+                      pointBackgroundColor: '#DCE6EC',
+                      fill: true
+                    }
+                  ]
+                },
+                options: {
+                  layout: { padding: { top: 2 } },
+                  plugins: {
+                    legend: { display: false },
+                    tooltip: {
+                      displayColors: false,
+                      callbacks: { title: () => '' }
+                    }
+                  },
+                  scales: {
+                    x: { display: false },
+                    y: { display: false, min: 0 }
+                  }
+                }
+              })
 
-      const sparkline1 = new ApexCharts(document.querySelector('#sparkline-1'), option_sparkline1);
-      sparkline1.render();
-
-      const option_sparkline2 = {
-        series: [
-          {
-            data: [515, 519, 520, 522, 652, 810, 370, 627, 319, 630, 921],
-          },
-        ],
-        chart: {
-          type: 'area',
-          height: 50,
-          sparkline: {
-            enabled: true,
-          },
-        },
-        stroke: {
-          curve: 'straight',
-        },
-        fill: {
-          opacity: 0.3,
-        },
-        yaxis: {
-          min: 0,
-        },
-        colors: ['#DCE6EC'],
-      };
-
-      const sparkline2 = new ApexCharts(document.querySelector('#sparkline-2'), option_sparkline2);
-      sparkline2.render();
-
-      const option_sparkline3 = {
-        series: [
-          {
-            data: [15, 19, 20, 22, 33, 27, 31, 27, 19, 30, 21],
-          },
-        ],
-        chart: {
-          type: 'area',
-          height: 50,
-          sparkline: {
-            enabled: true,
-          },
-        },
-        stroke: {
-          curve: 'straight',
-        },
-        fill: {
-          opacity: 0.3,
-        },
-        yaxis: {
-          min: 0,
-        },
-        colors: ['#DCE6EC'],
-      };
-
-      const sparkline3 = new ApexCharts(document.querySelector('#sparkline-3'), option_sparkline3);
-      sparkline3.render();
+            sparkline('#sparkline-1', [1000, 1200, 920, 927, 931, 1027, 819, 930, 1021])
+            sparkline('#sparkline-2', [515, 519, 520, 522, 652, 810, 370, 627, 319, 630, 921])
+            sparkline('#sparkline-3', [15, 19, 20, 22, 33, 27, 31, 27, 19, 30, 21])
     </script>
 {% endblock %}
