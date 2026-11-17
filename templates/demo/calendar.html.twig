@@ -1,5 +1,5 @@
 {#
-    Calendar — mirrors AdminLTE 4 dist/pages/calendar.html (FullCalendar 6).
+    Calendar — mirrors AdminLTE 4 dist/pages/calendar.html (FullCalendar 7).
 
     Wire it from a controller:
 
@@ -26,9 +26,12 @@
 {% endblock %}
 
 {% block stylesheets %}{{ parent() }}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@7.1.5/skeleton.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fullcalendar/bootstrap5@7.1.5/theme.css" crossorigin="anonymous">
     <style>
-      .fc-event {
-        cursor: pointer;
+      /* Keep adjacent-month dates readable in both Bootstrap color modes. */
+      #calendar .text-body-tertiary {
+        color: var(--bs-secondary-color) !important;
       }
       .draggable-event {
         cursor: grab;
@@ -85,7 +88,7 @@
                 </div>
                 <div class="card-footer text-secondary small">
                     Powered by
-                    <a href="https://fullcalendar.io/" target="_blank" rel="noopener">FullCalendar 6</a>
+                    <a href="https://fullcalendar.io/" target="_blank" rel="noopener">FullCalendar 7</a>
                     &mdash; MIT licensed, jQuery-free.
                 </div>
             </div>
@@ -94,22 +97,24 @@
 {% endblock %}
 
 {% block javascripts %}{{ parent() }}
-    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.20/index.global.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@7.1.5/all/global.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/bootstrap5@7.1.5/global.min.js" crossorigin="anonymous"></script>
     <script>
-      const isoDate = (d) => d.toISOString().slice(0, 10);
+      // Keep all-day dates local; UTC conversion can shift them by a day.
+      const isoDate = (d) => [d.getFullYear(), String(d.getMonth() + 1).padStart(2, "0"), String(d.getDate()).padStart(2, "0")].join("-");
 
-      document.addEventListener('DOMContentLoaded', () => {
-        const calendarEl = document.getElementById('calendar');
-        const externalEl = document.getElementById('external-events');
-        const removeAfterDrop = document.getElementById('remove-after-drop');
+      document.addEventListener("DOMContentLoaded", () => {
+        const cellObservers = new WeakMap();
+        const calendarEl = document.getElementById("calendar");
+        const externalEl = document.getElementById("external-events");
+        const removeAfterDrop = document.getElementById("remove-after-drop");
 
-        new FullCalendar.Draggable(externalEl, {
-          itemSelector: '.draggable-event',
+        new FullCalendar.Interaction.Draggable(externalEl, {
+          itemSelector: ".draggable-event",
           eventData: (el) => ({
             title: el.textContent.trim(),
-            backgroundColor: el.dataset.color,
-            borderColor: el.dataset.color,
-          }),
+            color: el.dataset.color
+          })
         });
 
         const today = new Date();
@@ -120,11 +125,29 @@
         };
 
         const calendar = new FullCalendar.Calendar(calendarEl, {
-          initialView: 'dayGridMonth',
+          initialView: "dayGridMonth",
+          buttons: { today: { hint: "Today" } },
+          // Date cells also contain event titles. Include that visible text in
+          // their accessible names, including after drag, edit, or navigation.
+          dayCellDidMount: ({ el }) => {
+            const dateLabel = el.getAttribute("aria-label") || "";
+            const syncLabel = () => {
+              const visibleText = el.textContent.replace(/\s+/g, " ").trim();
+              el.setAttribute("aria-label", `${dateLabel} ${visibleText}`.trim());
+            };
+            const observer = new MutationObserver(syncLabel);
+            observer.observe(el, { childList: true, subtree: true, characterData: true });
+            cellObservers.set(el, observer);
+            syncLabel();
+          },
+          dayCellWillUnmount: ({ el }) => {
+            cellObservers.get(el)?.disconnect();
+            cellObservers.delete(el);
+          },
           headerToolbar: {
-            start: 'prev,next today',
-            center: 'title',
-            end: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek',
+            start: "prev,next today",
+            center: "title",
+            end: "dayGridMonth,timeGridWeek,timeGridDay,listWeek"
           },
           height: 700,
           editable: true,
@@ -136,12 +159,12 @@
             }
           },
           dateClick: (info) => {
-            const title = prompt('Event title:');
+            const title = prompt("Event title:");
             if (title) {
               calendar.addEvent({
                 title: title,
                 start: info.dateStr,
-                allDay: info.allDay,
+                allDay: info.allDay
               });
             }
           },
@@ -151,39 +174,12 @@
             }
           },
           events: [
-            {
-              title: 'Quarterly planning',
-              start: offsetDay(-2),
-              backgroundColor: '#0d6efd',
-              borderColor: '#0d6efd',
-            },
-            {
-              title: 'Onboarding session',
-              start: offsetDay(1),
-              backgroundColor: '#198754',
-              borderColor: '#198754',
-            },
-            {
-              title: 'Design review',
-              start: offsetDay(3),
-              end: offsetDay(4),
-              backgroundColor: '#ffc107',
-              borderColor: '#ffc107',
-              textColor: '#000',
-            },
-            {
-              title: 'Release v2.5',
-              start: offsetDay(7),
-              backgroundColor: '#dc3545',
-              borderColor: '#dc3545',
-            },
-            {
-              title: 'All-hands',
-              start: offsetDay(10),
-              backgroundColor: '#6f42c1',
-              borderColor: '#6f42c1',
-            },
-          ],
+            { title: "Quarterly planning", start: offsetDay(-2), color: "#0d6efd" },
+            { title: "Onboarding session", start: offsetDay(1), color: "#198754" },
+            { title: "Design review", start: offsetDay(3), end: offsetDay(4), color: "#ffc107", contrastColor: "#000" },
+            { title: "Release v2.5", start: offsetDay(7), color: "#dc3545" },
+            { title: "All-hands", start: offsetDay(10), color: "#6f42c1" }
+          ]
         });
 
         calendar.render();
