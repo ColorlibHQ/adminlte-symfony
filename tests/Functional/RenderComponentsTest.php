@@ -36,8 +36,7 @@ final class RenderComponentsTest extends KernelTestCase
         // Widgets from the demo
         self::assertStringContainsString('small-box', $html);
         self::assertStringContainsString('New Orders', $html);
-        self::assertStringContainsString('info-box', $html);
-        self::assertStringContainsString('card card-primary card-outline', $html);
+        self::assertStringContainsString('direct-chat direct-chat-primary', $html);
 
         // Footer config came through
         self::assertStringContainsString('v1.0.0', $html);
