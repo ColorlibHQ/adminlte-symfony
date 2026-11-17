@@ -6,7 +6,24 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.2.2] - 2026-11-17
+
+### Changed
+- Pinned the CDN links to **admin-lte 4.10.2** (was 4.8.1), **Bootstrap 5.3.9** (was 5.3.8) and
+  Bootstrap Icons 1.13.2. Core 4.9-4.10 are picked up without a markup change: printing a page
+  no longer prints the app shell (sidebar, header, footer), plus `data-lte-print="plain"`,
+  `data-lte-contrast="aa"`, `data-lte-primary` and the opt-in colour sheets.
+- **The demo dashboards (v1, v2, v3) draw their charts with Chart.js 4.6.1 instead of
+  ApexCharts**, following core 4.10.0: ApexCharts 5.2+ is no longer MIT-licensed, and ApexCharts
+  3.x is unmaintained. A shared theme preset (`templates/demo/_chartjs.html.twig`) styles charts
+  from AdminLTE's CSS variables and follows light/dark mode live.
+- The demo calendar runs on FullCalendar 7.1.5 (with the Bootstrap 5 theme), jsVectorMap 1.7.0 and
+  SortableJS 1.15.7.
+- Composer dependencies refreshed (Symfony 8.1.11, UX 3.7, Twig 3.30, PHPUnit 13.4, PHPStan 2.3).
+
 ### Fixed
+- `RenderComponentsTest::testFullDashboardRenders` asserted `info-box` and `card-primary` markup
+  the demo dashboard stopped containing, so the suite failed on a clean checkout.
 - **The Simple Tables demo page rendered six tables with empty bodies.** The
   shared task rows came from a Twig macro called from inside
   `<twig:Adminlte:Card>` slots — and a Twig Component renders slot content in
@@ -86,6 +103,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - SSR-safe color/dark-mode toggle (no flash of incorrect theme) persisted to `localStorage`.
 - Optional **AdminLTE theme for EasyAdmin** (`templates/bundles/EasyAdminBundle`).
 
-[Unreleased]: https://github.com/ColorlibHQ/adminlte-symfony/compare/v0.2.1...HEAD
+[Unreleased]: https://github.com/ColorlibHQ/adminlte-symfony/compare/v0.2.2...HEAD
+[0.2.2]: https://github.com/ColorlibHQ/adminlte-symfony/compare/v0.2.1...v0.2.2
 [0.2.1]: https://github.com/ColorlibHQ/adminlte-symfony/compare/v0.2.0...v0.2.1
 [0.2.0]: https://github.com/ColorlibHQ/adminlte-symfony/releases/tag/v0.2.0
